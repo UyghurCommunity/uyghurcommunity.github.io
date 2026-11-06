@@ -1,0 +1,72 @@
+# UyghurCommunity · ئۇيغۇرچە ئىجاد ئۈچۈن ئوچۇق قوراللار
+
+The bilingual developer home for [UyghurCommunity](https://github.com/UyghurCommunity).
+
+**Website:** <https://uyghurcommunity.github.io/>
+
+A buildless, dependency-free catalog connecting six public projects: Doppa, Doppa Kit, Uyghur Keyboard, Lughet API, Uyghur RTL Lab, and Uyghur AI Eval.
+
+## ئۇيغۇرچە
+
+بۇ بەت ئۇيغۇرچە ئوچۇق مەنبەلىك تۈرلەرنىڭ ئورتاق باش بېتى. تۈرلەرنى ئىزدەش، تۈر بويىچە سۈزۈش، ئۇيغۇرچە/ئىنگلىزچە ئالماشتۇرۇش، يورۇق/قاراڭغۇ كۆرۈنۈش ۋە قاچىلاش بۇيرۇقىنى كۆچۈرۈشنى قوللايدۇ.
+
+لۇغەت كۆزنىكى ھەقىقىي HTTP API غا ئۇلىنىدۇ. ئۇلىنىش بولمىسا ئوچۇق خاتالىق ئۇچۇرى چىقىدۇ؛ ياسالما جاۋاب كۆرسەتمەيدۇ. لۇغەت ۋە AI باھالاش سانلىق مەلۇماتلىرىنىڭ لايىھە ھالىتى بەتتە ئېنىق بەلگىلەنگەن.
+
+## Run locally
+
+No package installation or build is required. From this directory:
+
+```bash
+python3 -m http.server 4173
+```
+
+Open <http://localhost:4173/>. Serve over HTTP, since the page loads ES modules and `projects.json`.
+
+## Content and configuration
+
+[`projects.json`](projects.json) is the catalog and deployment configuration.
+
+- `projects`: bilingual descriptions, categories, package names, source/demo/docs/release URLs, and pinned GitHub archive URLs.
+- `categories`: Uyghur and English filter labels.
+- `dictionaryApiBase`: the live Lughet API origin. The widget appends `/v1/search?q=...&limit=5`.
+- `registryStatus`: currently `pending`. The site clearly says npm registry publication is pending and offers **versioned GitHub source archive** installation commands. Do not change this to `published` until registry availability is verified.
+
+The default API origin is `https://uyghurcommunity-lughet-api.vercel.app`. Change it only after verifying a replacement deployment, including CORS access from this website. A failed or unavailable API produces an honest error with a link to the offline dictionary demo. The widget never substitutes fixture data for live results.
+
+Package installation links target each repository's `v0.1.0` GitHub tag. Keep those tags available, or update the catalog when changing release versions.
+
+## Features
+
+- Uyghur-first layout with a complete English interface toggle.
+- Responsive design, original embroidery-inspired vector artwork, and dark/light appearance.
+- Project search across both languages, tags, and package names, combined with category filters.
+- Source, demonstration, documentation, and release links for every project.
+- Four pinned GitHub archive installation commands and clipboard copy with a fallback.
+- A real dictionary API playground with timeout, loading, empty, error, provenance, and draft-data states.
+- Contribution links to real project issue trackers.
+- Keyboard focus indicators, semantic controls, skip link, reduced-motion support, and polite status messages.
+
+The site uses system Tahoma/Arial fonts; it does not redistribute a font asset. Language and appearance preferences are the only data written to local storage. Project search is local. Dictionary queries are sent to the configured public API only when the visitor presses Search. There are no analytics or third-party scripts.
+
+## Verify
+
+Node.js 18 or newer is required only for development checks:
+
+```bash
+npm test
+npm run check
+```
+
+The checks validate catalog structure, package archive safety, search/filter behavior, API query encoding, local assets, fragment links, DOM references, and CSS block balance. They do not replace a visual browser review.
+
+## Publish
+
+Use GitHub Pages from the `main` branch and repository root. This organization repository must be named `uyghurcommunity.github.io` to serve the root organization Pages address. `.nojekyll` is included; there is no build command.
+
+## Contribute
+
+Open an [issue](https://github.com/UyghurCommunity/uyghurcommunity.github.io/issues) for corrections, new ideas, or accessibility problems. A new project listing needs bilingual text, a working source URL, a working demonstration, and accurate status labels. Preserve draft-data and pending-registry notices until those statuses actually change.
+
+## License
+
+[MIT](LICENSE). The artwork in `assets/mark.svg` and the inline hero illustration are original project assets.

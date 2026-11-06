@@ -1,0 +1,10 @@
+{
+  "name": "uyghurcommunity-home",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "description": "The bilingual open-source developer home for UyghurCommunity.",
+  "scripts": { "test": "node --test", "check": "node scripts/check.js" },
+  "engines": { "node": ">=18" }
+}
