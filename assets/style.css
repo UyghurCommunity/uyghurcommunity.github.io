@@ -1,3 +1,13 @@
+@font-face {
+  font-family:"ALKATIP Basma";
+  src:url("https://db.onlinewebfonts.com/t/3c16518f40da2fc2901f37666c0556a7.woff2") format("woff2"),
+      url("https://db.onlinewebfonts.com/t/3c16518f40da2fc2901f37666c0556a7.woff") format("woff"),
+      url("https://db.onlinewebfonts.com/t/3c16518f40da2fc2901f37666c0556a7.ttf") format("truetype");
+  font-weight:normal;
+  font-style:normal;
+  font-display:swap;
+}
+
 :root {
   color-scheme:dark;
   --ink:#101e1c;
@@ -10,8 +20,10 @@
   --gold:#ddbf83;
   --gold-ink:#1b2a22;
   --teal:#a7c2ac;
-  --sans:Tahoma,Arial,sans-serif;
-  --mono:ui-monospace,SFMono-Regular,Consolas,monospace;
+  --uyghur:"ALKATIP Basma",Tahoma,Arial,sans-serif;
+  --latin:Tahoma,Arial,sans-serif;
+  --sans:var(--uyghur);
+  --mono:ui-monospace,SFMono-Regular,Consolas,"ALKATIP Basma",monospace;
   --gutter:clamp(22px,5vw,75px);
 }
 
@@ -1714,4 +1726,28 @@ html[dir=ltr] .project-description {
   .footer {
     padding:20px;
   }
+}
+
+/* Uyghur typography is independent of the interface's current language. */
+.alkatip-basma {
+  font-family: "ALKATIP Basma", serif;
+  direction:rtl;
+  unicode-bidi:embed;
+  line-height:2.2;
+}
+
+[lang="ug"],[lang="ug-Arab"] {
+  font-family:var(--uyghur);
+}
+
+[lang="en"],[lang="ug-Latn"] {
+  font-family:var(--latin);
+}
+
+html:lang(en) {
+  --sans:var(--latin);
+}
+
+html:lang(ug) body {
+  line-height:2.2;
 }

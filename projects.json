@@ -47,7 +47,7 @@
       "type": { "ug": "تور بۆلىكى + كۈتۈپخانا", "en": "Web component + library" },
       "status": { "ug": "v0.1", "en": "v0.1" },
       "package": "@uyghurcommunity/keyboard",
-      "archive": "https://github.com/UyghurCommunity/uyghur-keyboard/archive/refs/tags/v0.1.0.tar.gz",
+      "archive": "https://github.com/UyghurCommunity/uyghur-keyboard/archive/refs/tags/v0.1.1.tar.gz",
       "tags": ["keyboard", "input", "web component", "RTL", "npm"],
       "source": "https://github.com/UyghurCommunity/uyghur-keyboard",
       "demo": "https://uyghurcommunity.github.io/uyghur-keyboard/",

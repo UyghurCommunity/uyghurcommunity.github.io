@@ -43,8 +43,9 @@ function applyTheme() {
 function applyLanguage() {
   document.documentElement.lang = language;
   document.documentElement.dir = language === 'ug' ? 'rtl' : 'ltr';
+  $('project-search').lang = /[\u0600-\u06ff]/u.test($('project-search').value) ? 'ug' : language;
   document.title = language === 'ug' ? 'UyghurCommunity — ئۇيغۇرچە ئىجاد ئۈچۈن ئوچۇق قوراللار' : 'UyghurCommunity — Open tools for creating in Uyghur';
-  document.querySelectorAll('[data-i18n]').forEach((node) => { node.textContent = t(node.dataset.i18n); });
+  document.querySelectorAll('[data-i18n]').forEach((node) => { node.textContent = t(node.dataset.i18n); node.lang = language; });
   document.querySelectorAll('[data-i18n-placeholder]').forEach((node) => { node.placeholder = t(node.dataset.i18nPlaceholder); });
   document.querySelectorAll('[data-i18n-aria]').forEach((node) => { node.setAttribute('aria-label', t(node.dataset.i18nAria)); });
   $('language-toggle').textContent = language === 'ug' ? 'English' : 'ئۇيغۇرچە';
@@ -61,6 +62,7 @@ function renderCategories() {
   for (const [id, names] of Object.entries(catalog.categories)) {
     const button = element('button', names[language]);
     button.type = 'button';
+    button.lang = language;
     button.setAttribute('aria-pressed', String(activeCategory === id));
     button.addEventListener('click', () => { activeCategory = id; renderCategories(); renderProjects(); });
     fragment.append(button);
@@ -141,7 +143,8 @@ function renderDictionary(payload) {
   }
   $('dictionary-results').replaceChildren(fragment);
 }
-$('project-search').addEventListener('input', () => { if (catalog) renderProjects(); });
+$('project-search').addEventListener('input', (event) => { event.target.lang = /[\u0600-\u06ff]/u.test(event.target.value) ? 'ug' : language; if (catalog) renderProjects(); });
+$('dictionary-query').addEventListener('input', (event) => { event.target.lang = /[\u0600-\u06ff]/u.test(event.target.value) ? 'ug' : 'en'; });
 $('clear-filters').addEventListener('click', () => { activeCategory = 'all'; $('project-search').value = ''; renderCategories(); renderProjects(); $('project-search').focus(); });
 $('package-select').addEventListener('change', (event) => { chosenPackage = event.target.value; renderPackages(); $('copy-status').textContent = ''; });
 $('language-toggle').addEventListener('click', () => { language = language === 'ug' ? 'en' : 'ug'; applyLanguage(); try { localStorage.setItem('ug-community-language', language); } catch (_) {} });

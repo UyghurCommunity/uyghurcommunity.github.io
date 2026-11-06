@@ -33,7 +33,7 @@ Open <http://localhost:4173/>. Serve over HTTP, since the page loads ES modules 
 
 The default API origin is `https://uyghurcommunity-lughet-api.vercel.app`. Change it only after verifying a replacement deployment, including CORS access from this website. A failed or unavailable API produces an honest error with a link to the offline dictionary demo. The widget never substitutes fixture data for live results.
 
-Package installation links target each repository's `v0.1.0` GitHub tag. Keep those tags available, or update the catalog when changing release versions.
+Package installation links target per-project GitHub tags: the keyboard uses `v0.1.1`; the other libraries use `v0.1.0`. Keep those tags available, or update each archive URL in the catalog when changing release versions.
 
 ## Features
 
@@ -46,7 +46,7 @@ Package installation links target each repository's `v0.1.0` GitHub tag. Keep th
 - Contribution links to real project issue trackers.
 - Keyboard focus indicators, semantic controls, skip link, reduced-motion support, and polite status messages.
 
-The site uses system Tahoma/Arial fonts; it does not redistribute a font asset. Language and appearance preferences are the only data written to local storage. Project search is local. Dictionary queries are sent to the configured public API only when the visitor presses Search. There are no analytics or third-party scripts.
+Uyghur text uses **ALKATIP Basma**, loaded through external WOFF2/WOFF/TTF font URLs from `db.onlinewebfonts.com`, with Tahoma/Arial fallbacks. English text keeps system typography and code remains monospace. The `.alkatip-basma` helper applies RTL direction, embedded bidi handling, and a 2.2 line height. No font binaries are redistributed. Language and appearance preferences are the only data written to local storage. Project search is local. Dictionary queries are sent to the configured public API only when the visitor presses Search. There are no analytics or third-party scripts.
 
 ## Verify
 

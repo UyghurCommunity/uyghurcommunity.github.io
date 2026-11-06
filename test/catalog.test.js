@@ -35,9 +35,11 @@ test('search terms and category are combined without changing the source catalog
 test('installation commands use pinned community release archives, never unpublished registry names', () => {
   for (const project of catalog.projects.filter((project) => project.package)) {
     const command = buildInstallCommand(project);
-    assert.ok(command.startsWith(`npm install https://github.com/UyghurCommunity/${project.id}/archive/refs/tags/v0.1.0.tar.gz`));
+    assert.equal(command, `npm install ${project.archive}`);
+    assert.match(new URL(project.archive).pathname, new RegExp(`^/UyghurCommunity/${project.id}/archive/refs/tags/v[0-9]+\\.[0-9]+\\.[0-9]+\\.tar\\.gz$`));
     assert.ok(!command.includes('npm install @'));
   }
+  assert.ok(catalog.projects.find((project) => project.id === 'uyghur-keyboard').archive.endsWith('/v0.1.1.tar.gz'));
   assert.throws(() => buildInstallCommand(catalog.projects[0]));
   assert.throws(() => buildInstallCommand({ package: '@uyghurcommunity/a', archive: 'https://evil.example/a.tar.gz' }));
   assert.throws(() => buildInstallCommand({ package: '@uyghurcommunity/a', archive: 'https://github.com/UyghurCommunity/a/archive/refs/tags/v0.1.0.tar.gz?x=1' }));
