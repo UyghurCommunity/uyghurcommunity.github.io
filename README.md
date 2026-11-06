@@ -37,6 +37,8 @@ Package installation links target per-project GitHub tags: the keyboard uses `v0
 
 ## Features
 
+- Original animated digital loom with flowing threadwork, a moving shuttle, and project glyphs. A bilingual motion button pauses the decoration; reduced-motion settings, page visibility, and viewport visibility are respected. Project cards have scroll entrances and pointer highlights. All content remains available when motion or JavaScript is disabled; no animation library or external component code is bundled.
+
 - Uyghur-first layout with a complete English interface toggle.
 - Responsive design, original embroidery-inspired vector artwork, and dark/light appearance.
 - Project search across both languages, tags, and package names, combined with category filters.
