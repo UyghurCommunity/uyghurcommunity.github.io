@@ -128,7 +128,8 @@ function renderDictionary(payload) {
     const title = element('h3', word.word); title.lang = 'ug'; title.dir = 'rtl';
     const latin = element('bdi', word.latin || ''); latin.lang = 'ug-Latn';
     top.append(title, latin);
-    const definition = element('p', word.definition); definition.lang = 'ug'; definition.dir = 'rtl';
+    // Lughet's starter definitions are English, independent of the interface language.
+    const definition = element('p', word.definition); definition.lang = 'en'; definition.dir = 'ltr';
     card.append(top, definition);
     fragment.append(card);
   });

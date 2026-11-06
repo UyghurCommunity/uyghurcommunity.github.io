@@ -1,0 +1,34 @@
+{
+  "data": [
+    {
+      "id": "mektep",
+      "word": "مەكتەپ",
+      "latin": "mektep",
+      "partOfSpeech": "noun",
+      "definition": "A school, a place where students learn.",
+      "audioUrl": null,
+      "reviewStatus": "draft",
+      "sourceIds": [
+        "community-original-v1"
+      ]
+    }
+  ],
+  "meta": {
+    "datasetVersion": "0.1.0",
+    "reviewStatus": "draft",
+    "totalEntries": 33,
+    "sources": [
+      {
+        "id": "community-original-v1",
+        "title": "UyghurCommunity original starter vocabulary",
+        "url": "https://github.com/UyghurCommunity/lughet-api",
+        "license": "CC0-1.0",
+        "kind": "original-editorial-draft",
+        "attribution": "UyghurCommunity contributors"
+      }
+    ],
+    "query": "مەكتەپ",
+    "total": 1,
+    "limit": 5
+  }
+}

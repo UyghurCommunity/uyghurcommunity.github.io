@@ -5,6 +5,8 @@ import vm from 'node:vm';
 import { buildInstallCommand, buildSearchURL, filterProjects, isWebURL, validateCatalog } from '../src/catalog.js';
 const catalog = JSON.parse(await readFile(new URL('../projects.json', import.meta.url), 'utf8'));
 const html = await readFile(new URL('../index.html', import.meta.url), 'utf8');
+// Captured from the original Lughet 0.1.0 dataset via its real local adapter.
+const lughetPayload = JSON.parse(await readFile(new URL('./fixtures/lughet-mektep.json', import.meta.url), 'utf8'));
 const source = (await readFile(new URL('../src/app.js', import.meta.url), 'utf8'))
   .replace(/^import[^\n]+\n/, '')
   .replace("new URL('../projects.json', import.meta.url)", "new URL('https://example.test/projects.json')");
@@ -123,7 +125,7 @@ test('saved English and light preferences restore on startup', async () => {
 });
 
 test('live dictionary response is rendered from actual payload with provenance', async () => {
-  const app = await harness({ api: async () => ({ ok: true, json: async () => ({ data: [{ word: 'مەكتەپ', latin: 'mektep', definition: 'ئوقۇش ئورنى.' }], meta: { datasetVersion: '0.1.0', sources: [{ url: 'https://github.com/UyghurCommunity/lughet-api' }] } }) }) });
+  const app = await harness({ api: async () => ({ ok: true, json: async () => structuredClone(lughetPayload) }) });
   await app.nodes.get('dictionary-form').emit('submit');
   const content = app.nodes.get('dictionary-results').textContent;
   assert.match(content, /مەكتەپ/);
@@ -131,6 +133,26 @@ test('live dictionary response is rendered from actual payload with provenance',
   assert.match(content, /0.1.0/);
   assert.ok(app.calls.at(-1).includes('/v1/search?'));
   assert.equal(app.nodes.get('dictionary-button').disabled, false);
+});
+
+test('real English Lughet definitions retain English direction in both interface languages', async () => {
+  const app = await harness({ api: async () => ({ ok: true, json: async () => structuredClone(lughetPayload) }) });
+  await app.nodes.get('dictionary-form').emit('submit');
+  const assertEntryLanguages = () => {
+    const card = app.nodes.get('dictionary-results').children[0];
+    const heading = card.children[0].children[0];
+    const definition = card.children.find((node) => node.tagName === 'P');
+    assert.equal(heading.lang, 'ug');
+    assert.equal(heading.dir, 'rtl');
+    assert.equal(definition.textContent, 'A school, a place where students learn.');
+    assert.equal(definition.lang, 'en');
+    assert.equal(definition.dir, 'ltr');
+  };
+  assert.equal(app.root.lang, 'ug');
+  assertEntryLanguages();
+  await app.nodes.get('language-toggle').emit('click');
+  assert.equal(app.root.lang, 'en');
+  assertEntryLanguages();
 });
 
 test('unavailable API produces an error with no fabricated result and permits retry', async () => {
