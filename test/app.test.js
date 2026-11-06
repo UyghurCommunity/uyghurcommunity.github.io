@@ -77,13 +77,14 @@ async function harness({ failCatalog = false, api, preferences = {} } = {}) {
   return { nodes, root, storage, copied, calls, context };
 }
 
-test('application loads six cards, four archive packages, and honest registry status', async () => {
+test('application loads ten cards, seven release packages, and honest registry status', async () => {
   const app = await harness();
-  assert.equal(app.nodes.get('project-grid').children.length, 6);
-  assert.equal(app.nodes.get('package-select').children.length, 4);
+  assert.equal(app.nodes.get('project-grid').children.length, 10);
+  assert.equal(app.nodes.get('package-select').children.length, 7);
   assert.match(app.nodes.get('install-command').textContent, /doppa-kit\/archive\/refs\/tags\/v0.1.0/);
   assert.equal(app.nodes.get('registry-note').hidden, false);
-  assert.equal(app.nodes.get('project-count').textContent, '6');
+  assert.equal(app.nodes.get('project-count').textContent, '10');
+  assert.equal(app.nodes.get('package-count').textContent, '7');
 });
 
 test('category and text search combine, then clear restores all cards', async () => {
@@ -96,7 +97,7 @@ test('category and text search combine, then clear restores all cards', async ()
   assert.equal(app.nodes.get('project-grid').children.length, 0);
   assert.equal(app.nodes.get('empty-results').hidden, false);
   await app.nodes.get('clear-filters').emit('click');
-  assert.equal(app.nodes.get('project-grid').children.length, 6);
+  assert.equal(app.nodes.get('project-grid').children.length, 10);
   assert.equal(app.nodes.get('project-search').focused, true);
 });
 
@@ -182,4 +183,24 @@ test('invalid API payload fails safely and unsafe source links are omitted', asy
   assert.ok(valid.nodes.get('dictionary-results').textContent.includes('<script>'));
   const provenance = valid.nodes.get('dictionary-results').children.at(-1);
   assert.equal(provenance.children.length, 0);
+});
+
+test('new projects are searchable and new release package choices survive language changes', async () => {
+  const app = await harness();
+  app.nodes.get('project-search').value = '@uyghurcommunity/create';
+  await app.nodes.get('project-search').emit('input');
+  assert.equal(app.nodes.get('project-grid').children.length, 1);
+  assert.match(app.nodes.get('project-grid').textContent, /@uyghurcommunity\/create/);
+  const select = app.nodes.get('package-select');
+  select.children.forEach((option) => { option.selected = option.value === 'uyghur-starters'; });
+  await select.emit('change');
+  const archive = catalog.projects.find((project) => project.id === 'uyghur-starters').archive;
+  assert.equal(app.nodes.get('install-command').textContent, 'npm install ' + archive);
+  await app.nodes.get('language-toggle').emit('click');
+  assert.equal(app.nodes.get('install-command').textContent, 'npm install ' + archive);
+  await app.nodes.get('copy-command').emit('click');
+  assert.equal(app.copied[0], 'npm install ' + archive);
+  await app.nodes.get('clear-filters').emit('click');
+  assert.equal(app.nodes.get('project-grid').children.length, 10);
+  assert.equal(app.nodes.get('package-count').textContent, '7');
 });

@@ -39,7 +39,10 @@ export function filterProjects(projects, { query = '', category = 'all' } = {}) 
 export function buildInstallCommand(project) {
   if (!project?.package || !isWebURL(project.archive)) throw new Error('Choose an installable project with a valid release archive.');
   const url = new URL(project.archive);
-  if (url.hostname !== 'github.com' || !/^\/UyghurCommunity\/[a-z0-9.-]+\/archive\/refs\/tags\/v[0-9.]+\.tar\.gz$/.test(url.pathname) || url.search || url.hash) throw new Error('Install archives must be versioned UyghurCommunity GitHub releases.');
+  const source = url.pathname.match(/^\/UyghurCommunity\/([a-z0-9][a-z0-9.-]*)\/archive\/refs\/tags\/v(\d+\.\d+\.\d+)\.tar\.gz$/);
+  const asset = url.pathname.match(/^\/UyghurCommunity\/([a-z0-9][a-z0-9.-]*)\/releases\/download\/v(\d+\.\d+\.\d+)\/uyghurcommunity-([a-z0-9][a-z0-9.-]*)-(\d+\.\d+\.\d+)\.tgz$/);
+  const match = source || asset;
+  if (url.protocol !== 'https:' || url.hostname !== 'github.com' || !match || url.search || url.hash || (project.id && match[1] !== project.id) || (asset && (asset[2] !== asset[4] || project.package !== `@uyghurcommunity/${asset[3]}`))) throw new Error('Install archives must be matching versioned UyghurCommunity GitHub releases.');
   return `npm install ${url.href}`;
 }
 export function buildSearchURL(base, query) {

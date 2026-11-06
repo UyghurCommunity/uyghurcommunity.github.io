@@ -3,22 +3,66 @@
   "dictionaryApiBase": "https://uyghurcommunity-lughet-api.vercel.app",
   "registryStatus": "pending",
   "categories": {
-    "all": { "ug": "ھەممىسى", "en": "All projects" },
-    "culture": { "ug": "مەدەنىيەت", "en": "Culture" },
-    "input": { "ug": "يېزىش", "en": "Input" },
-    "language": { "ug": "تىل قوراللىرى", "en": "Language" },
-    "frontend": { "ug": "تور لايىھەسى", "en": "Frontend" },
-    "evaluation": { "ug": "باھالاش", "en": "Evaluation" }
+    "all": {
+      "ug": "ھەممىسى",
+      "en": "All projects"
+    },
+    "culture": {
+      "ug": "مەدەنىيەت",
+      "en": "Culture"
+    },
+    "input": {
+      "ug": "يېزىش",
+      "en": "Input"
+    },
+    "language": {
+      "ug": "تىل قوراللىرى",
+      "en": "Language"
+    },
+    "frontend": {
+      "ug": "تور لايىھەسى",
+      "en": "Frontend"
+    },
+    "evaluation": {
+      "ug": "باھالاش",
+      "en": "Evaluation"
+    },
+    "design": {
+      "ug": "ئىجاد ۋە لايىھە",
+      "en": "Creative tools"
+    },
+    "starters": {
+      "ug": "باشلاش قېلىپلىرى",
+      "en": "Starters"
+    }
   },
   "projects": [
     {
       "id": "doppa",
-      "title": { "ug": "دوپپا", "en": "Doppa" },
-      "description": { "ug": "كەشتە، رەڭ ۋە ھەرىكەت بىر سەھنىدە. سۆرەپ ئايلاندۇرغىلى بولىدىغان رەقەملىك دوپپا ۋە تور بەت جانلاندۇرۇش تەجرىبىسى.", "en": "Embroidery, color, and motion on one stage. Explore a draggable digital doppa and configurable page-building animations." },
+      "title": {
+        "ug": "دوپپا",
+        "en": "Doppa"
+      },
+      "description": {
+        "ug": "كەشتە، رەڭ ۋە ھەرىكەت بىر سەھنىدە. سۆرەپ ئايلاندۇرغىلى بولىدىغان رەقەملىك دوپپا ۋە تور بەت جانلاندۇرۇش تەجرىبىسى.",
+        "en": "Embroidery, color, and motion on one stage. Explore a draggable digital doppa and configurable page-building animations."
+      },
       "category": "culture",
-      "type": { "ug": "جانلىق كۆرگەزمە", "en": "Interactive showcase" },
-      "status": { "ug": "تەجرىبە", "en": "Creative experiment" },
-      "tags": ["canvas", "doppa", "embroidery", "RTL", "motion"],
+      "type": {
+        "ug": "جانلىق كۆرگەزمە",
+        "en": "Interactive showcase"
+      },
+      "status": {
+        "ug": "تەجرىبە",
+        "en": "Creative experiment"
+      },
+      "tags": [
+        "canvas",
+        "doppa",
+        "embroidery",
+        "RTL",
+        "motion"
+      ],
       "source": "https://github.com/UyghurCommunity/doppa",
       "demo": "https://uyghurcommunity.github.io/doppa/",
       "docs": "https://github.com/UyghurCommunity/doppa#readme",
@@ -26,14 +70,32 @@
     },
     {
       "id": "doppa-kit",
-      "title": { "ug": "دوپپا قوراللىرى", "en": "Doppa Kit" },
-      "description": { "ug": "رەقەملىك دوپپا ۋە ئەتلەس رەڭلىرىنى ئۆز بېتىڭىزگە قوشۇڭ. رەڭ، ئايلاندۇرۇش ۋە ھەرىكەت كونتروللىرى بار مۇستەقىل كۆرسىتىش قورالى.", "en": "Bring the digital doppa and atlas-inspired palettes to your own site, with rotation, color controls, and accessible motion options." },
+      "title": {
+        "ug": "دوپپا قوراللىرى",
+        "en": "Doppa Kit"
+      },
+      "description": {
+        "ug": "رەقەملىك دوپپا ۋە ئەتلەس رەڭلىرىنى ئۆز بېتىڭىزگە قوشۇڭ. رەڭ، ئايلاندۇرۇش ۋە ھەرىكەت كونتروللىرى بار مۇستەقىل كۆرسىتىش قورالى.",
+        "en": "Bring the digital doppa and atlas-inspired palettes to your own site, with rotation, color controls, and accessible motion options."
+      },
       "category": "culture",
-      "type": { "ug": "JavaScript كۈتۈپخانىسى", "en": "JavaScript library" },
-      "status": { "ug": "v0.1", "en": "v0.1" },
+      "type": {
+        "ug": "JavaScript كۈتۈپخانىسى",
+        "en": "JavaScript library"
+      },
+      "status": {
+        "ug": "v0.1",
+        "en": "v0.1"
+      },
       "package": "@uyghurcommunity/doppa",
       "archive": "https://github.com/UyghurCommunity/doppa-kit/archive/refs/tags/v0.1.0.tar.gz",
-      "tags": ["canvas", "SVG", "pattern", "doppa", "npm"],
+      "tags": [
+        "canvas",
+        "SVG",
+        "pattern",
+        "doppa",
+        "npm"
+      ],
       "source": "https://github.com/UyghurCommunity/doppa-kit",
       "demo": "https://uyghurcommunity.github.io/doppa-kit/",
       "docs": "https://github.com/UyghurCommunity/doppa-kit#readme",
@@ -41,14 +103,32 @@
     },
     {
       "id": "uyghur-keyboard",
-      "title": { "ug": "ئۇيغۇرچە كۇنۇپكا تاختىسى", "en": "Uyghur Keyboard" },
-      "description": { "ug": "ھەر قانداق كىرگۈزۈش رامكىسىغا ئۇيغۇرچە يېزىش قوشۇڭ. مەۋھۇم كۇنۇپكىلار، تاللانغان تېكىستكە توغرا كىرگۈزۈش ۋە ئىختىيارىي كۇنۇپكا ماسلاشتۇرۇش.", "en": "Add Uyghur typing to an input or textarea, with virtual keys, selection-aware insertion, and optional physical-key mapping." },
+      "title": {
+        "ug": "ئۇيغۇرچە كۇنۇپكا تاختىسى",
+        "en": "Uyghur Keyboard"
+      },
+      "description": {
+        "ug": "ھەر قانداق كىرگۈزۈش رامكىسىغا ئۇيغۇرچە يېزىش قوشۇڭ. مەۋھۇم كۇنۇپكىلار، تاللانغان تېكىستكە توغرا كىرگۈزۈش ۋە ئىختىيارىي كۇنۇپكا ماسلاشتۇرۇش.",
+        "en": "Add Uyghur typing to an input or textarea, with virtual keys, selection-aware insertion, and optional physical-key mapping."
+      },
       "category": "input",
-      "type": { "ug": "تور بۆلىكى + كۈتۈپخانا", "en": "Web component + library" },
-      "status": { "ug": "v0.1", "en": "v0.1" },
+      "type": {
+        "ug": "تور بۆلىكى + كۈتۈپخانا",
+        "en": "Web component + library"
+      },
+      "status": {
+        "ug": "v0.1",
+        "en": "v0.1"
+      },
       "package": "@uyghurcommunity/keyboard",
       "archive": "https://github.com/UyghurCommunity/uyghur-keyboard/archive/refs/tags/v0.1.1.tar.gz",
-      "tags": ["keyboard", "input", "web component", "RTL", "npm"],
+      "tags": [
+        "keyboard",
+        "input",
+        "web component",
+        "RTL",
+        "npm"
+      ],
       "source": "https://github.com/UyghurCommunity/uyghur-keyboard",
       "demo": "https://uyghurcommunity.github.io/uyghur-keyboard/",
       "docs": "https://github.com/UyghurCommunity/uyghur-keyboard#readme",
@@ -56,14 +136,33 @@
     },
     {
       "id": "lughet-api",
-      "title": { "ug": "لۇغەت API", "en": "Lughet API" },
-      "description": { "ug": "كىچىك، مەنبەسى ئېنىق لۇغەت باشلانمىسى. ئىزدەش، تەكلىپ، بۈگۈنكى سۆز ۋە تورسىز ئىشلىتىشكە ماس JavaScript SDK.", "en": "A small dictionary starter with explicit provenance: search, suggestions, word of the day, and a JavaScript SDK with an offline adapter." },
+      "title": {
+        "ug": "لۇغەت API",
+        "en": "Lughet API"
+      },
+      "description": {
+        "ug": "كىچىك، مەنبەسى ئېنىق لۇغەت باشلانمىسى. ئىزدەش، تەكلىپ، بۈگۈنكى سۆز ۋە تورسىز ئىشلىتىشكە ماس JavaScript SDK.",
+        "en": "A small dictionary starter with explicit provenance: search, suggestions, word of the day, and a JavaScript SDK with an offline adapter."
+      },
       "category": "language",
-      "type": { "ug": "HTTP API + SDK", "en": "HTTP API + SDK" },
-      "status": { "ug": "لايىھە سانلىق مەلۇمات", "en": "Draft vocabulary" },
+      "type": {
+        "ug": "HTTP API + SDK",
+        "en": "HTTP API + SDK"
+      },
+      "status": {
+        "ug": "لايىھە سانلىق مەلۇمات",
+        "en": "Draft vocabulary"
+      },
       "package": "@uyghurcommunity/lughet",
       "archive": "https://github.com/UyghurCommunity/lughet-api/archive/refs/tags/v0.1.0.tar.gz",
-      "tags": ["dictionary", "API", "search", "SDK", "npm", "draft"],
+      "tags": [
+        "dictionary",
+        "API",
+        "search",
+        "SDK",
+        "npm",
+        "draft"
+      ],
       "source": "https://github.com/UyghurCommunity/lughet-api",
       "demo": "https://uyghurcommunity.github.io/lughet-api/",
       "docs": "https://github.com/UyghurCommunity/lughet-api#readme",
@@ -71,12 +170,30 @@
     },
     {
       "id": "uyghur-rtl-lab",
-      "title": { "ug": "ئۇيغۇرچە RTL تەجرىبىخانىسى", "en": "Uyghur RTL Lab" },
-      "description": { "ug": "ئۇيغۇرچە بىلەن ئىنگلىزچە، تور ئادرېسى، سان ۋە كود ئارىلاشقاندا نېمە قىلىش كېرەك؟ كۆچۈرگىلى بولىدىغان مىساللار ۋە تەكشۈرۈش ئەھۋاللىرى.", "en": "Practical examples for Uyghur mixed with English, URLs, numbers, forms, and code, with copyable recipes and inspectable test fixtures." },
+      "title": {
+        "ug": "ئۇيغۇرچە RTL تەجرىبىخانىسى",
+        "en": "Uyghur RTL Lab"
+      },
+      "description": {
+        "ug": "ئۇيغۇرچە بىلەن ئىنگلىزچە، تور ئادرېسى، سان ۋە كود ئارىلاشقاندا نېمە قىلىش كېرەك؟ كۆچۈرگىلى بولىدىغان مىساللار ۋە تەكشۈرۈش ئەھۋاللىرى.",
+        "en": "Practical examples for Uyghur mixed with English, URLs, numbers, forms, and code, with copyable recipes and inspectable test fixtures."
+      },
       "category": "frontend",
-      "type": { "ug": "مىساللار + تەكشۈرۈشلەر", "en": "Recipes + fixtures" },
-      "status": { "ug": "v0.1", "en": "v0.1" },
-      "tags": ["RTL", "bidi", "CSS", "HTML", "accessibility"],
+      "type": {
+        "ug": "مىساللار + تەكشۈرۈشلەر",
+        "en": "Recipes + fixtures"
+      },
+      "status": {
+        "ug": "v0.1",
+        "en": "v0.1"
+      },
+      "tags": [
+        "RTL",
+        "bidi",
+        "CSS",
+        "HTML",
+        "accessibility"
+      ],
       "source": "https://github.com/UyghurCommunity/uyghur-rtl-lab",
       "demo": "https://uyghurcommunity.github.io/uyghur-rtl-lab/",
       "docs": "https://github.com/UyghurCommunity/uyghur-rtl-lab#readme",
@@ -84,18 +201,172 @@
     },
     {
       "id": "uyghur-ai-eval",
-      "title": { "ug": "ئۇيغۇرچە AI باھالاش", "en": "Uyghur AI Eval" },
-      "description": { "ug": "40 لايىھە سوئال، تورسىز CLI ۋە تەكشۈرگىلى بولىدىغان ھېسابات. ئاپتوماتىك نومۇر بىلەن ئادەم تەكشۈرۈشى ئايرىم كۆرسىتىلىدۇ.", "en": "Forty draft tasks, an offline CLI, and auditable reports. Automatic exact-match scores stay separate from pending human review." },
+      "title": {
+        "ug": "ئۇيغۇرچە AI باھالاش",
+        "en": "Uyghur AI Eval"
+      },
+      "description": {
+        "ug": "40 لايىھە سوئال، تورسىز CLI ۋە تەكشۈرگىلى بولىدىغان ھېسابات. ئاپتوماتىك نومۇر بىلەن ئادەم تەكشۈرۈشى ئايرىم كۆرسىتىلىدۇ.",
+        "en": "Forty draft tasks, an offline CLI, and auditable reports. Automatic exact-match scores stay separate from pending human review."
+      },
       "category": "evaluation",
-      "type": { "ug": "سانلىق مەلۇمات + CLI", "en": "Dataset + CLI" },
-      "status": { "ug": "مۇتەخەسسىس تەكشۈرمىگەن", "en": "Not expert-reviewed" },
+      "type": {
+        "ug": "سانلىق مەلۇمات + CLI",
+        "en": "Dataset + CLI"
+      },
+      "status": {
+        "ug": "مۇتەخەسسىس تەكشۈرمىگەن",
+        "en": "Not expert-reviewed"
+      },
       "package": "@uyghurcommunity/ai-eval",
       "archive": "https://github.com/UyghurCommunity/uyghur-ai-eval/archive/refs/tags/v0.1.0.tar.gz",
-      "tags": ["AI", "evaluation", "CLI", "JSONL", "npm", "draft"],
+      "tags": [
+        "AI",
+        "evaluation",
+        "CLI",
+        "JSONL",
+        "npm",
+        "draft"
+      ],
       "source": "https://github.com/UyghurCommunity/uyghur-ai-eval",
       "demo": "https://uyghurcommunity.github.io/uyghur-ai-eval/",
       "docs": "https://github.com/UyghurCommunity/uyghur-ai-eval#readme",
       "releases": "https://github.com/UyghurCommunity/uyghur-ai-eval/releases"
+    },
+    {
+      "id": "uyghur-ui",
+      "title": {
+        "ug": "ئۇيغۇرچە UI",
+        "en": "Uyghur UI"
+      },
+      "description": {
+        "ug": "ئۇيغۇرچە RTL بەتلىرى ئۈچۈن بۆلەكلەر كۆرگەزمىسى ۋە مۇستەقىل CSS كۈتۈپخانىسى. كونترول، شەكىل، كارتا ۋە ئارىلاش يېزىق مىساللىرى.",
+        "en": "A Uyghur RTL component gallery and standalone CSS library, with controls, forms, cards, and mixed-script examples."
+      },
+      "category": "frontend",
+      "type": {
+        "ug": "UI كۆرگەزمىسى + CSS",
+        "en": "UI gallery + CSS library"
+      },
+      "status": {
+        "ug": "v0.1.0",
+        "en": "v0.1.0"
+      },
+      "package": "@uyghurcommunity/ui",
+      "archive": "https://github.com/UyghurCommunity/uyghur-ui/releases/download/v0.1.0/uyghurcommunity-ui-0.1.0.tgz",
+      "tags": [
+        "UI",
+        "CSS",
+        "components",
+        "RTL",
+        "accessibility",
+        "gallery"
+      ],
+      "source": "https://github.com/UyghurCommunity/uyghur-ui",
+      "demo": "https://uyghurcommunity.github.io/uyghur-ui/",
+      "docs": "https://github.com/UyghurCommunity/uyghur-ui#readme",
+      "releases": "https://github.com/UyghurCommunity/uyghur-ui/releases"
+    },
+    {
+      "id": "doppa-studio",
+      "title": {
+        "ug": "دوپپا ستۇدىيەسى",
+        "en": "Doppa Studio"
+      },
+      "description": {
+        "ug": "توركۆرگۈچتە نەقىشنى كۆز بىلەن تەھرىرلەڭ. يەرلىك ئىجاد ئۈچۈن رەڭ ۋە شەكىل كونتروللىرى بار مۇستەقىل ستۇدىيە.",
+        "en": "A visual pattern editor in your browser, with color and shape controls for private, local creation."
+      },
+      "category": "design",
+      "type": {
+        "ug": "يەرلىك كۆرۈنۈشلۈك تەھرىرلىگۈچ",
+        "en": "Local visual pattern editor"
+      },
+      "status": {
+        "ug": "توركۆرگۈچتە يەرلىك",
+        "en": "Local-first studio"
+      },
+      "tags": [
+        "pattern",
+        "editor",
+        "SVG",
+        "doppa",
+        "design",
+        "privacy"
+      ],
+      "source": "https://github.com/UyghurCommunity/doppa-studio",
+      "demo": "https://uyghurcommunity.github.io/doppa-studio/",
+      "docs": "https://github.com/UyghurCommunity/doppa-studio#readme",
+      "releases": "https://github.com/UyghurCommunity/doppa-studio/releases"
+    },
+    {
+      "id": "uyghur-text",
+      "title": {
+        "ug": "ئۇيغۇرچە تېكىست قوراللىرى",
+        "en": "Uyghur Text"
+      },
+      "description": {
+        "ug": "ئۇيغۇرچە تېكىستنى كۆزىتىش ۋە بىر تەرەپ قىلىش قوراللىرى. Unicode، يېزىق ۋە قۇر بىر تەرەپ قىلىشنى سىناشقا ماس يەرلىك خىزمەت بوشلۇقى.",
+        "en": "A local text workbench and reusable utilities for inspecting Uyghur Unicode, script, and text handling."
+      },
+      "category": "language",
+      "type": {
+        "ug": "تېكىست خىزمەت بوشلۇقى + كۈتۈپخانا",
+        "en": "Text workbench + library"
+      },
+      "status": {
+        "ug": "v0.1.0",
+        "en": "v0.1.0"
+      },
+      "package": "@uyghurcommunity/text",
+      "archive": "https://github.com/UyghurCommunity/uyghur-text/releases/download/v0.1.0/uyghurcommunity-text-0.1.0.tgz",
+      "tags": [
+        "Unicode",
+        "text",
+        "script",
+        "workbench",
+        "RTL",
+        "utilities"
+      ],
+      "source": "https://github.com/UyghurCommunity/uyghur-text",
+      "demo": "https://uyghurcommunity.github.io/uyghur-text/",
+      "docs": "https://github.com/UyghurCommunity/uyghur-text#readme",
+      "releases": "https://github.com/UyghurCommunity/uyghur-text/releases"
+    },
+    {
+      "id": "uyghur-starters",
+      "title": {
+        "ug": "ئۇيغۇرچە باشلاش قېلىپلىرى",
+        "en": "Uyghur Starters"
+      },
+      "description": {
+        "ug": "بىلوگ، قوللانما، ئىجادىيەت ۋە جەمئىيەت ئۈچۈن تۆت مۇستەقىل RTL قېلىپى. تورسىز CLI يېڭى قىسقۇچقا كۆچۈرىدۇ؛ ئۈلگە مەزمۇن ئېنىق بەلگىلەنگەن.",
+        "en": "Four independent RTL starters for blogs, docs, portfolios, and communities. An offline CLI copies a new site; sample content is explicitly labeled."
+      },
+      "category": "starters",
+      "type": {
+        "ug": "تۆت قېلىپ + تورسىز CLI",
+        "en": "Four templates + offline CLI"
+      },
+      "status": {
+        "ug": "ئۈلگە مەزمۇن",
+        "en": "Illustrative starter content"
+      },
+      "package": "@uyghurcommunity/create",
+      "archive": "https://github.com/UyghurCommunity/uyghur-starters/releases/download/v0.1.0/uyghurcommunity-create-0.1.0.tgz",
+      "tags": [
+        "templates",
+        "blog",
+        "docs",
+        "portfolio",
+        "community",
+        "CLI",
+        "starter"
+      ],
+      "source": "https://github.com/UyghurCommunity/uyghur-starters",
+      "demo": "https://uyghurcommunity.github.io/uyghur-starters/",
+      "docs": "https://github.com/UyghurCommunity/uyghur-starters#readme",
+      "releases": "https://github.com/UyghurCommunity/uyghur-starters/releases"
     }
   ]
 }

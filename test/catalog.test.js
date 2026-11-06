@@ -4,10 +4,10 @@ import { readFile } from 'node:fs/promises';
 import { buildInstallCommand, buildSearchURL, filterProjects, isWebURL, validateCatalog } from '../src/catalog.js';
 const catalog = JSON.parse(await readFile(new URL('../projects.json', import.meta.url), 'utf8'));
 
-test('catalog describes all six real project routes and four versioned packages without claiming npm publication', () => {
+test('catalog describes all ten real project routes and seven versioned packages without claiming npm publication', () => {
   assert.deepEqual(validateCatalog(catalog), { valid: true, errors: [] });
-  assert.deepEqual(catalog.projects.map((project) => project.id), ['doppa', 'doppa-kit', 'uyghur-keyboard', 'lughet-api', 'uyghur-rtl-lab', 'uyghur-ai-eval']);
-  assert.equal(catalog.projects.filter((project) => project.package).length, 4);
+  assert.deepEqual(catalog.projects.map((project) => project.id), ['doppa', 'doppa-kit', 'uyghur-keyboard', 'lughet-api', 'uyghur-rtl-lab', 'uyghur-ai-eval', 'uyghur-ui', 'doppa-studio', 'uyghur-text', 'uyghur-starters']);
+  assert.equal(catalog.projects.filter((project) => project.package).length, 7);
   assert.equal(catalog.registryStatus, 'pending');
   for (const project of catalog.projects) {
     assert.equal(new URL(project.source).pathname, `/UyghurCommunity/${project.id}`);
@@ -22,6 +22,10 @@ test('search works across Uyghur, English, package names and tags', () => {
   assert.equal(filterProjects(catalog.projects, { query: '@uyghurcommunity/lughet' })[0].id, 'lughet-api');
   assert.equal(filterProjects(catalog.projects, { query: 'JSONL' })[0].id, 'uyghur-ai-eval');
   assert.equal(filterProjects(catalog.projects, { query: 'no-such-project' }).length, 0);
+  assert.equal(filterProjects(catalog.projects, { query: '@uyghurcommunity/ui' })[0].id, 'uyghur-ui');
+  assert.equal(filterProjects(catalog.projects, { query: 'workbench' })[0].id, 'uyghur-text');
+  assert.equal(filterProjects(catalog.projects, { category:'starters', query:'blog CLI' })[0].id, 'uyghur-starters');
+  assert.equal(filterProjects(catalog.projects, { category:'design' })[0].id, 'doppa-studio');
 });
 
 test('search terms and category are combined without changing the source catalog', () => {
@@ -29,14 +33,16 @@ test('search terms and category are combined without changing the source catalog
   assert.equal(result.length, 2);
   assert.equal(filterProjects(catalog.projects, { category: 'input', query: 'doppa' }).length, 0);
   assert.equal(filterProjects(catalog.projects, { query: 'AI CLI' })[0].id, 'uyghur-ai-eval');
-  assert.equal(catalog.projects.length, 6);
+  assert.equal(catalog.projects.length, 10);
 });
 
 test('installation commands use pinned community release archives, never unpublished registry names', () => {
   for (const project of catalog.projects.filter((project) => project.package)) {
     const command = buildInstallCommand(project);
     assert.equal(command, `npm install ${project.archive}`);
-    assert.match(new URL(project.archive).pathname, new RegExp(`^/UyghurCommunity/${project.id}/archive/refs/tags/v[0-9]+\\.[0-9]+\\.[0-9]+\\.tar\\.gz$`));
+    const pathname = new URL(project.archive).pathname;
+    assert.ok(pathname.startsWith('/UyghurCommunity/' + project.id + '/'));
+    assert.ok(/\/archive\/refs\/tags\/v\d+\.\d+\.\d+\.tar\.gz$/.test(pathname) || /\/releases\/download\/v\d+\.\d+\.\d+\/uyghurcommunity-[a-z-]+-\d+\.\d+\.\d+\.tgz$/.test(pathname));
     assert.ok(!command.includes('npm install @'));
   }
   assert.ok(catalog.projects.find((project) => project.id === 'uyghur-keyboard').archive.endsWith('/v0.1.1.tar.gz'));
@@ -77,4 +83,24 @@ test('draft vocabulary and evaluation status are visible in both languages', () 
   assert.match(evaluation.status.en, /Not expert-reviewed/);
   assert.ok(dictionary.status.ug);
   assert.ok(evaluation.status.ug);
+});
+
+test('new release assets match repository, package name and pinned version', () => {
+  const expected = {
+    'uyghur-ui': 'uyghurcommunity-ui-0.1.0.tgz',
+    'uyghur-text': 'uyghurcommunity-text-0.1.0.tgz',
+    'uyghur-starters': 'uyghurcommunity-create-0.1.0.tgz',
+  };
+  for (const [id,filename] of Object.entries(expected)) {
+    const project = catalog.projects.find((item) => item.id === id);
+    assert.equal(project.archive, 'https://github.com/UyghurCommunity/' + id + '/releases/download/v0.1.0/' + filename);
+    assert.equal(buildInstallCommand(project), 'npm install ' + project.archive);
+  }
+  const ui = catalog.projects.find((project) => project.id === 'uyghur-ui');
+  assert.throws(() => buildInstallCommand({...ui,archive:ui.archive.replace('ui-0.1.0.tgz','ui-0.2.0.tgz')}));
+  assert.throws(() => buildInstallCommand({...ui,archive:ui.archive.replace('uyghurcommunity-ui-','uyghurcommunity-text-')}));
+  assert.throws(() => buildInstallCommand({...ui,archive:ui.archive.replace('/uyghur-ui/','/other-repo/')}));
+  assert.throws(() => buildInstallCommand({...ui,archive:ui.archive.replace('https:','http:')}));
+  assert.throws(() => buildInstallCommand({...ui,archive:ui.archive + '?download=1'}));
+  assert.equal(catalog.projects.find((project) => project.id === 'doppa-studio').package, undefined);
 });
