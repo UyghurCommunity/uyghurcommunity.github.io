@@ -240,8 +240,8 @@
         "en": "Uyghur UI"
       },
       "description": {
-        "ug": "ئۇيغۇرچە RTL بەتلىرى ئۈچۈن بۆلەكلەر كۆرگەزمىسى ۋە مۇستەقىل CSS كۈتۈپخانىسى. كونترول، شەكىل، كارتا ۋە ئارىلاش يېزىق مىساللىرى.",
-        "en": "A Uyghur RTL component gallery and standalone CSS library, with controls, forms, cards, and mixed-script examples."
+        "ug": "ئۇيغۇرچە RTL كۆرۈنمە يۈز بۆلەكلىرى: فورما، سۆزلىشىش كۆزنىكى ۋە 74 SVG سىنبەلگە. بۇنىڭ ئىچىدىكى 27 سىنبەلگە ئۇيغۇر مەدەنىيىتىدىن ئىلھاملانغان؛ دۇتار، راۋاپ ۋە ئەتلەسنى ئۆز ئىچىگە ئالىدۇ.",
+        "en": "Uyghur RTL components with forms, dialogs and 74 SVG icons, including 27 culture-inspired symbols for instruments, textiles, food and architecture."
       },
       "category": "frontend",
       "type": {
@@ -249,18 +249,29 @@
         "en": "UI gallery + CSS library"
       },
       "status": {
-        "ug": "v0.1.0",
-        "en": "v0.1.0"
+        "ug": "v0.2.0",
+        "en": "v0.2.0"
       },
       "package": "@uyghurcommunity/ui",
-      "archive": "https://github.com/UyghurCommunity/uyghur-ui/releases/download/v0.1.0/uyghurcommunity-ui-0.1.0.tgz",
+      "archive": "https://github.com/UyghurCommunity/uyghur-ui/releases/download/v0.2.0/uyghurcommunity-ui-0.2.0.tgz",
       "tags": [
         "UI",
         "CSS",
         "components",
         "RTL",
         "accessibility",
-        "gallery"
+        "gallery",
+        "SVG",
+        "icons",
+        "heritage",
+        "dutar",
+        "rawap",
+        "atlas",
+        "سىنبەلگە",
+        "مىراس",
+        "دۇتار",
+        "راۋاپ",
+        "ئەتلەس"
       ],
       "source": "https://github.com/UyghurCommunity/uyghur-ui",
       "demo": "https://uyghurcommunity.github.io/uyghur-ui/",

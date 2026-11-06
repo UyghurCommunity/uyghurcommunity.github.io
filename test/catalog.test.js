@@ -26,6 +26,9 @@ test('search works across Uyghur, English, package names and tags', () => {
   assert.equal(filterProjects(catalog.projects, { query: 'workbench' })[0].id, 'uyghur-text');
   assert.equal(filterProjects(catalog.projects, { category:'starters', query:'blog CLI' })[0].id, 'uyghur-starters');
   assert.equal(filterProjects(catalog.projects, { category:'design' })[0].id, 'doppa-studio');
+  for (const query of ['dutar', 'rawap', 'atlas', 'heritage icons', 'دۇتار', 'راۋاپ', 'ئەتلەس', 'مىراس سىنبەلگە']) {
+    assert.ok(filterProjects(catalog.projects, { category:'frontend', query }).some((project) => project.id === 'uyghur-ui'), query);
+  }
 });
 
 test('search terms and category are combined without changing the source catalog', () => {
@@ -87,17 +90,17 @@ test('draft vocabulary and evaluation status are visible in both languages', () 
 
 test('new release assets match repository, package name and pinned version', () => {
   const expected = {
-    'uyghur-ui': 'uyghurcommunity-ui-0.1.0.tgz',
-    'uyghur-text': 'uyghurcommunity-text-0.1.0.tgz',
-    'uyghur-starters': 'uyghurcommunity-create-0.1.0.tgz',
+    'uyghur-ui': ['0.2.0', 'uyghurcommunity-ui-0.2.0.tgz'],
+    'uyghur-text': ['0.1.0', 'uyghurcommunity-text-0.1.0.tgz'],
+    'uyghur-starters': ['0.1.0', 'uyghurcommunity-create-0.1.0.tgz'],
   };
-  for (const [id,filename] of Object.entries(expected)) {
+  for (const [id,[version,filename]] of Object.entries(expected)) {
     const project = catalog.projects.find((item) => item.id === id);
-    assert.equal(project.archive, 'https://github.com/UyghurCommunity/' + id + '/releases/download/v0.1.0/' + filename);
+    assert.equal(project.archive, 'https://github.com/UyghurCommunity/' + id + '/releases/download/v' + version + '/' + filename);
     assert.equal(buildInstallCommand(project), 'npm install ' + project.archive);
   }
   const ui = catalog.projects.find((project) => project.id === 'uyghur-ui');
-  assert.throws(() => buildInstallCommand({...ui,archive:ui.archive.replace('ui-0.1.0.tgz','ui-0.2.0.tgz')}));
+  assert.throws(() => buildInstallCommand({...ui,archive:ui.archive.replace('ui-0.2.0.tgz','ui-0.3.0.tgz')}));
   assert.throws(() => buildInstallCommand({...ui,archive:ui.archive.replace('uyghurcommunity-ui-','uyghurcommunity-text-')}));
   assert.throws(() => buildInstallCommand({...ui,archive:ui.archive.replace('/uyghur-ui/','/other-repo/')}));
   assert.throws(() => buildInstallCommand({...ui,archive:ui.archive.replace('https:','http:')}));

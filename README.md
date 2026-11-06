@@ -33,7 +33,9 @@ Open <http://localhost:4173/>. Serve over HTTP, since the page loads ES modules 
 
 The default API origin is `https://uyghurcommunity-lughet-api.vercel.app`. Change it only after verifying a replacement deployment, including CORS access from this website. A failed or unavailable API produces an honest error with a link to the offline dictionary demo. The widget never substitutes fixture data for live results.
 
-Package installation links use per-project versions: the keyboard uses v0.1.1; the other packages use v0.1.0. The original four packages use GitHub source archives. Uyghur UI, Uyghur Text, and the starter CLI use their pinned .tgz release assets. Keep those tags and assets available, or update each archive URL in the catalog when changing release versions. No command depends on npm registry publication.
+Package installation links use per-project versions: Uyghur UI uses v0.2.0, the keyboard uses v0.1.1, and other packages use v0.1.0. The original four packages use GitHub source archives. Uyghur UI, Uyghur Text, and the starter CLI use their pinned .tgz release assets. Keep those tags and assets available, or update each archive URL in the catalog when changing release versions. No command depends on npm registry publication.
+
+Uyghur UI includes 74 SVG icons, with 27 cultural pictograms. The catalog supports searches for icon names and Uyghur cultural terms such as dutar / دۇتار, rawap / راۋاپ, and atlas / ئەتلەس.
 
 ## Features
 

@@ -204,3 +204,24 @@ test('new projects are searchable and new release package choices survive langua
   assert.equal(app.nodes.get('project-grid').children.length, 10);
   assert.equal(app.nodes.get('package-count').textContent, '7');
 });
+
+test('cultural icon searches expose UI 0.2.0 and its current release in both languages', async () => {
+  const app = await harness();
+  app.nodes.get('project-search').value = 'دۇتار';
+  await app.nodes.get('project-search').emit('input');
+  assert.equal(app.nodes.get('project-grid').children.length, 1);
+  assert.match(app.nodes.get('project-grid').textContent, /74 SVG/);
+  assert.match(app.nodes.get('project-grid').textContent, /27/);
+  assert.match(app.nodes.get('project-grid').textContent, /v0\.2\.0/);
+  const select = app.nodes.get('package-select');
+  select.children.forEach((option) => { option.selected = option.value === 'uyghur-ui'; });
+  await select.emit('change');
+  const command = 'npm install https://github.com/UyghurCommunity/uyghur-ui/releases/download/v0.2.0/uyghurcommunity-ui-0.2.0.tgz';
+  assert.equal(app.nodes.get('install-command').textContent, command);
+  await app.nodes.get('language-toggle').emit('click');
+  assert.equal(app.nodes.get('project-grid').children.length, 1);
+  assert.match(app.nodes.get('project-grid').textContent, /27 culture-inspired/);
+  assert.equal(app.nodes.get('install-command').textContent, command);
+  assert.equal(app.nodes.get('project-count').textContent, '10');
+  assert.equal(app.nodes.get('package-count').textContent, '7');
+});
