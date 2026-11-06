@@ -240,8 +240,8 @@
         "en": "Uyghur UI"
       },
       "description": {
-        "ug": "ئۇيغۇرچە RTL كۆرۈنمە يۈز بۆلەكلىرى: فورما، سۆزلىشىش كۆزنىكى ۋە 74 SVG سىنبەلگە. بۇنىڭ ئىچىدىكى 27 سىنبەلگە ئۇيغۇر مەدەنىيىتىدىن ئىلھاملانغان؛ دۇتار، راۋاپ ۋە ئەتلەسنى ئۆز ئىچىگە ئالىدۇ.",
-        "en": "Uyghur RTL components with forms, dialogs and 74 SVG icons, including 27 culture-inspired symbols for instruments, textiles, food and architecture."
+        "ug": "تۈرگە ئايرىلغان قوللانما، قاچىلاش باسقۇچلىرى ۋە ئۇيغۇرچە RTL فورما ۋە كۆزنەكلەر. 74 SVG سىنبەلگە ئىچىدە 27 سى مەدەنىيەتتىن ئىلھاملانغان؛ دۇتار، راۋاپ ۋە ئەتلەس بار.",
+        "en": "Structured installation guides, native Uyghur RTL forms and dialogs, and 74 SVG icons including 27 culture-inspired symbols."
       },
       "category": "frontend",
       "type": {
@@ -261,6 +261,10 @@
         "RTL",
         "accessibility",
         "gallery",
+        "documentation",
+        "installation",
+        "قوللانما",
+        "قاچىلاش",
         "SVG",
         "icons",
         "heritage",
@@ -275,7 +279,7 @@
       ],
       "source": "https://github.com/UyghurCommunity/uyghur-ui",
       "demo": "https://uyghurcommunity.github.io/uyghur-ui/",
-      "docs": "https://github.com/UyghurCommunity/uyghur-ui#readme",
+      "docs": "https://uyghurcommunity.github.io/uyghur-ui/guide/introduction.html",
       "releases": "https://github.com/UyghurCommunity/uyghur-ui/releases"
     },
     {

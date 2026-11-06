@@ -35,7 +35,7 @@ The default API origin is `https://uyghurcommunity-lughet-api.vercel.app`. Chang
 
 Package installation links use per-project versions: Uyghur UI uses v0.2.0, the keyboard uses v0.1.1, and other packages use v0.1.0. The original four packages use GitHub source archives. Uyghur UI, Uyghur Text, and the starter CLI use their pinned .tgz release assets. Keep those tags and assets available, or update each archive URL in the catalog when changing release versions. No command depends on npm registry publication.
 
-Uyghur UI includes 74 SVG icons, with 27 cultural pictograms. The catalog supports searches for icon names and Uyghur cultural terms such as dutar / دۇتار, rawap / راۋاپ, and atlas / ئەتلەس.
+Uyghur UI includes [structured documentation and installation guides](https://uyghurcommunity.github.io/uyghur-ui/guide/introduction.html), native RTL components, and 74 SVG icons with 27 cultural pictograms. The catalog supports searches for documentation topics, icon names, and Uyghur cultural terms such as dutar / دۇتار, rawap / راۋاپ, and atlas / ئەتلەس.
 
 ## Features
 
