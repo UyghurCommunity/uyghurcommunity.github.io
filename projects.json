@@ -240,8 +240,8 @@
         "en": "Uyghur UI"
       },
       "description": {
-        "ug": "تۈرگە ئايرىلغان قوللانما، قاچىلاش باسقۇچلىرى ۋە ئۇيغۇرچە RTL فورما ۋە كۆزنەكلەر. 74 SVG سىنبەلگە ئىچىدە 27 سى مەدەنىيەتتىن ئىلھاملانغان؛ دۇتار، راۋاپ ۋە ئەتلەس بار.",
-        "en": "Structured installation guides, native Uyghur RTL forms and dialogs, and 74 SVG icons including 27 culture-inspired symbols."
+        "ug": "ئۇيغۇرچە RTL بۆلەكلىرى ۋە قاچىلاش قوللانمىسى. سىزىقلىق ۋە مىراس رەڭلىرىدە 110 SVG سىنبەلگە (63 مەدەنىيەت سىنبەلگىسى)، شەرقىي تۈركىستان بايرىقى ۋە خەرىتە ھۆججەتلىرى.",
+        "en": "Uyghur RTL components and structured guides, with 110 SVG icons (63 cultural) in outline and heritage-color styles, plus East Turkistan flag and map assets."
       },
       "category": "frontend",
       "type": {
@@ -249,11 +249,11 @@
         "en": "UI gallery + CSS library"
       },
       "status": {
-        "ug": "v0.2.0",
-        "en": "v0.2.0"
+        "ug": "v0.3.0",
+        "en": "v0.3.0"
       },
       "package": "@uyghurcommunity/ui",
-      "archive": "https://github.com/UyghurCommunity/uyghur-ui/releases/download/v0.2.0/uyghurcommunity-ui-0.2.0.tgz",
+      "archive": "https://github.com/UyghurCommunity/uyghur-ui/releases/download/v0.3.0/uyghurcommunity-ui-0.3.0.tgz",
       "tags": [
         "UI",
         "CSS",
@@ -271,8 +271,23 @@
         "dutar",
         "rawap",
         "atlas",
+        "cultural",
+        "clothing",
+        "motifs",
+        "map",
+        "East Turkistan",
+        "outline",
+        "filled",
+        "color",
         "سىنبەلگە",
         "مىراس",
+        "مەدەنىيەت",
+        "كىيىم-كېچەك",
+        "نەقىش",
+        "خەرىتە",
+        "شەرقىي تۈركىستان",
+        "سىزىقلىق",
+        "رەڭلىك",
         "دۇتار",
         "راۋاپ",
         "ئەتلەس"

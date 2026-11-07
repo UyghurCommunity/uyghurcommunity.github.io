@@ -26,7 +26,7 @@ test('search works across Uyghur, English, package names and tags', () => {
   assert.equal(filterProjects(catalog.projects, { query: 'workbench' })[0].id, 'uyghur-text');
   assert.equal(filterProjects(catalog.projects, { category:'starters', query:'blog CLI' })[0].id, 'uyghur-starters');
   assert.equal(filterProjects(catalog.projects, { category:'design' })[0].id, 'doppa-studio');
-  for (const query of ['dutar', 'rawap', 'atlas', 'heritage icons', 'دۇتار', 'راۋاپ', 'ئەتلەس', 'مىراس سىنبەلگە']) {
+  for (const query of ['dutar', 'rawap', 'atlas', 'heritage icons', 'cultural icons', 'clothing', 'motifs', 'East Turkistan map', 'outline map', 'filled map', 'color icons', 'دۇتار', 'راۋاپ', 'ئەتلەس', 'مىراس سىنبەلگە', 'مەدەنىيەت', 'كىيىم', 'نەقىش', 'خەرىتە', 'شەرقىي تۈركىستان', 'رەڭلىك']) {
     assert.ok(filterProjects(catalog.projects, { category:'frontend', query }).some((project) => project.id === 'uyghur-ui'), query);
   }
 });
@@ -90,7 +90,7 @@ test('draft vocabulary and evaluation status are visible in both languages', () 
 
 test('new release assets match repository, package name and pinned version', () => {
   const expected = {
-    'uyghur-ui': ['0.2.0', 'uyghurcommunity-ui-0.2.0.tgz'],
+    'uyghur-ui': ['0.3.0', 'uyghurcommunity-ui-0.3.0.tgz'],
     'uyghur-text': ['0.1.0', 'uyghurcommunity-text-0.1.0.tgz'],
     'uyghur-starters': ['0.1.0', 'uyghurcommunity-create-0.1.0.tgz'],
   };
@@ -100,7 +100,7 @@ test('new release assets match repository, package name and pinned version', () 
     assert.equal(buildInstallCommand(project), 'npm install ' + project.archive);
   }
   const ui = catalog.projects.find((project) => project.id === 'uyghur-ui');
-  assert.throws(() => buildInstallCommand({...ui,archive:ui.archive.replace('ui-0.2.0.tgz','ui-0.3.0.tgz')}));
+  assert.throws(() => buildInstallCommand({...ui,archive:ui.archive.replace('ui-0.3.0.tgz','ui-0.4.0.tgz')}));
   assert.throws(() => buildInstallCommand({...ui,archive:ui.archive.replace('uyghurcommunity-ui-','uyghurcommunity-text-')}));
   assert.throws(() => buildInstallCommand({...ui,archive:ui.archive.replace('/uyghur-ui/','/other-repo/')}));
   assert.throws(() => buildInstallCommand({...ui,archive:ui.archive.replace('https:','http:')}));

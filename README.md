@@ -33,9 +33,9 @@ Open <http://localhost:4173/>. Serve over HTTP, since the page loads ES modules 
 
 The default API origin is `https://uyghurcommunity-lughet-api.vercel.app`. Change it only after verifying a replacement deployment, including CORS access from this website. A failed or unavailable API produces an honest error with a link to the offline dictionary demo. The widget never substitutes fixture data for live results.
 
-Package installation links use per-project versions: Uyghur UI uses v0.2.0, the keyboard uses v0.1.1, and other packages use v0.1.0. The original four packages use GitHub source archives. Uyghur UI, Uyghur Text, and the starter CLI use their pinned .tgz release assets. Keep those tags and assets available, or update each archive URL in the catalog when changing release versions. No command depends on npm registry publication.
+Package installation links use per-project versions: Uyghur UI uses v0.3.0, the keyboard uses v0.1.1, and other packages use v0.1.0. The original four packages use GitHub source archives. Uyghur UI, Uyghur Text, and the starter CLI use their pinned .tgz release assets. Keep those tags and assets available, or update each archive URL in the catalog when changing release versions. No command depends on npm registry publication.
 
-Uyghur UI includes [structured documentation and installation guides](https://uyghurcommunity.github.io/uyghur-ui/guide/introduction.html), native RTL components, and 74 SVG icons with 27 cultural pictograms. The catalog supports searches for documentation topics, icon names, and Uyghur cultural terms such as dutar / دۇتار, rawap / راۋاپ, and atlas / ئەتلەس.
+Uyghur UI includes [structured documentation and installation guides](https://uyghurcommunity.github.io/uyghur-ui/guide/introduction.html), native RTL components, and 110 SVG icons with 63 cultural pictograms in outline and heritage-color styles. It also provides the East Turkistan flag and downloadable outline and filled map assets. The cultural SVGs are original simplified interpretations of clothing, instruments, architecture, and decorative motifs. The catalog supports searches in both languages, including map / خەرىتە, clothing / كىيىم, motifs / نەقىش, dutar / دۇتار, and atlas / ئەتلەس.
 
 ## Features
 
