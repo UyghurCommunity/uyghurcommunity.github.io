@@ -11,7 +11,7 @@ test('catalog describes all ten real project routes and seven versioned packages
   assert.equal(catalog.registryStatus, 'pending');
   for (const project of catalog.projects) {
     assert.equal(new URL(project.source).pathname, `/UyghurCommunity/${project.id}`);
-    assert.equal(new URL(project.demo).pathname, `/${project.id}/`);
+    assert.equal(new URL(project.demo).pathname, project.id === 'uyghur-ui' ? '/uyghur-ui/interactions.html' : `/${project.id}/`);
     assert.equal(new URL(project.releases).pathname, `/UyghurCommunity/${project.id}/releases`);
   }
 });
@@ -37,6 +37,21 @@ test('search terms and category are combined without changing the source catalog
   assert.equal(filterProjects(catalog.projects, { category: 'input', query: 'doppa' }).length, 0);
   assert.equal(filterProjects(catalog.projects, { query: 'AI CLI' })[0].id, 'uyghur-ai-eval');
   assert.equal(catalog.projects.length, 10);
+});
+
+test('UI interactions are discoverable in both languages with docs and the existing 0.3.0 release', () => {
+  const ui = catalog.projects.find((project) => project.id === 'uyghur-ui');
+  assert.equal(ui.demo, 'https://uyghurcommunity.github.io/uyghur-ui/interactions.html');
+  assert.equal(ui.docs, 'https://uyghurcommunity.github.io/uyghur-ui/guide/introduction.html');
+  assert.match(ui.description.ug, /6 ئەسلى جانلىق مىسال/);
+  assert.match(ui.description.en, /6 original interaction demos with native controls and 6 standalone HTML downloads/);
+  for (const query of ['interactions', 'interactivity', 'motion', 'native controls', 'standalone HTML', 'ئۆزئارا تەسىر', 'جانلاندۇرۇش', 'ھەرىكەت', 'جانلىق مىسال']) {
+    assert.deepEqual(filterProjects(catalog.projects, { category: 'frontend', query }).map((project) => project.id), ['uyghur-ui'], query);
+  }
+  assert.deepEqual(ui.status, { ug: 'v0.3.0', en: 'v0.3.0' });
+  assert.equal(buildInstallCommand(ui), 'npm install https://github.com/UyghurCommunity/uyghur-ui/releases/download/v0.3.0/uyghurcommunity-ui-0.3.0.tgz');
+  assert.equal(catalog.projects.length, 10);
+  assert.equal(catalog.projects.filter((project) => project.package).length, 7);
 });
 
 test('installation commands use pinned community release archives, never unpublished registry names', () => {

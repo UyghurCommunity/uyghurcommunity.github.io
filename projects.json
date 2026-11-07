@@ -240,8 +240,8 @@
         "en": "Uyghur UI"
       },
       "description": {
-        "ug": "ئۇيغۇرچە RTL بۆلەكلىرى ۋە قاچىلاش قوللانمىسى. سىزىقلىق ۋە مىراس رەڭلىرىدە 110 SVG سىنبەلگە (63 مەدەنىيەت سىنبەلگىسى)، شەرقىي تۈركىستان بايرىقى ۋە خەرىتە ھۆججەتلىرى.",
-        "en": "Uyghur RTL components and structured guides, with 110 SVG icons (63 cultural) in outline and heritage-color styles, plus East Turkistan flag and map assets."
+        "ug": "ئۇيغۇرچە RTL بۆلەكلىرى، قاچىلاش قوللانمىسى ۋە 6 ئەسلى جانلىق مىسال. كۇنۇپكا ۋە سىيرىلما كونتروللار، 6 مۇستەقىل HTML چۈشۈرۈش، سىزىقلىق ۋە مىراس رەڭلىرىدە 110 SVG سىنبەلگە (63 مەدەنىيەت سىنبەلگىسى)، شەرقىي تۈركىستان بايرىقى ۋە خەرىتىسى.",
+        "en": "Uyghur RTL components and structured guides, plus 6 original interaction demos with native controls and 6 standalone HTML downloads. Includes 110 SVG icons (63 cultural) in outline and heritage-color styles, plus East Turkistan flag and map assets."
       },
       "category": "frontend",
       "type": {
@@ -256,6 +256,16 @@
       "archive": "https://github.com/UyghurCommunity/uyghur-ui/releases/download/v0.3.0/uyghurcommunity-ui-0.3.0.tgz",
       "tags": [
         "UI",
+        "interactions",
+        "motion",
+        "interactivity",
+        "animation",
+        "native controls",
+        "standalone HTML",
+        "ئۆزئارا تەسىر",
+        "جانلاندۇرۇش",
+        "ھەرىكەت",
+        "جانلىق مىسال",
         "CSS",
         "components",
         "RTL",
@@ -293,7 +303,7 @@
         "ئەتلەس"
       ],
       "source": "https://github.com/UyghurCommunity/uyghur-ui",
-      "demo": "https://uyghurcommunity.github.io/uyghur-ui/",
+      "demo": "https://uyghurcommunity.github.io/uyghur-ui/interactions.html",
       "docs": "https://uyghurcommunity.github.io/uyghur-ui/guide/introduction.html",
       "releases": "https://github.com/UyghurCommunity/uyghur-ui/releases"
     },

@@ -12,6 +12,8 @@ A buildless, dependency-free catalog connecting ten public projects: Doppa, Dopp
 
 لۇغەت كۆزنىكى ھەقىقىي HTTP API غا ئۇلىنىدۇ. ئۇلىنىش بولمىسا ئوچۇق خاتالىق ئۇچۇرى چىقىدۇ؛ ياسالما جاۋاب كۆرسەتمەيدۇ. لۇغەت ۋە AI باھالاش سانلىق مەلۇماتلىرىنىڭ لايىھە ھالىتى بەتتە ئېنىق بەلگىلەنگەن.
 
+[ئۇيغۇرچە UI نىڭ 6 ئەسلى جانلىق مىسالى](https://uyghurcommunity.github.io/uyghur-ui/interactions.html)نى كۇنۇپكا تاختىسى ۋە چەكمە ئېكران بىلەن سىناڭ. ھەر بىر مىسالنى CSS ۋە JavaScript قوشۇلغان مۇستەقىل HTML ھۆججىتى سۈپىتىدە چۈشۈرەلەيسىز. [قاچىلاش ۋە ئىشلىتىش قوللانمىسى](https://uyghurcommunity.github.io/uyghur-ui/guide/introduction.html)مۇ بار.
+
 ## Run locally
 
 No package installation or build is required. From this directory:
@@ -36,6 +38,8 @@ The default API origin is `https://uyghurcommunity-lughet-api.vercel.app`. Chang
 Package installation links use per-project versions: Uyghur UI uses v0.3.0, the keyboard uses v0.1.1, and other packages use v0.1.0. The original four packages use GitHub source archives. Uyghur UI, Uyghur Text, and the starter CLI use their pinned .tgz release assets. Keep those tags and assets available, or update each archive URL in the catalog when changing release versions. No command depends on npm registry publication.
 
 Uyghur UI includes [structured documentation and installation guides](https://uyghurcommunity.github.io/uyghur-ui/guide/introduction.html), native RTL components, and 110 SVG icons with 63 cultural pictograms in outline and heritage-color styles. It also provides the East Turkistan flag and downloadable outline and filled map assets. The cultural SVGs are original simplified interpretations of clothing, instruments, architecture, and decorative motifs. The catalog supports searches in both languages, including map / خەرىتە, clothing / كىيىم, motifs / نەقىش, dutar / دۇتار, and atlas / ئەتلەس.
+
+Its [Interactions gallery](https://uyghurcommunity.github.io/uyghur-ui/interactions.html) presents **6 original website demos**: embroidery spotlight, Doppa depth card, Atlas selection, envelope send, map comparison, and ornament ripple. Native buttons and ranges support keyboard and touch, respect reduced motion, and provide static feedback. Each demo offers a complete standalone HTML download with its CSS and JavaScript. Search for interactions, interactivity, motion, ئۆزئارا تەسىر, or جانلاندۇرۇش to find Uyghur UI; its hub Demo link opens the gallery. The installable package stays at v0.3.0 with the same pinned release archive.
 
 ## Features
 

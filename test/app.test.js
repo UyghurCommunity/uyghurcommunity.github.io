@@ -231,3 +231,26 @@ test('cultural and map searches expose UI 0.3.0 and its current release in both 
   assert.equal(app.nodes.get('project-count').textContent, '10');
   assert.equal(app.nodes.get('package-count').textContent, '7');
 });
+
+test('interaction searches expose six website demos, their live gallery, and docs in both interface languages', async () => {
+  const app = await harness();
+  for (const query of ['interactions', 'uyghur-ui motion', 'uyghur-ui ئۆزئارا تەسىر', 'uyghur-ui جانلاندۇرۇش']) {
+    app.nodes.get('project-search').value = query;
+    await app.nodes.get('project-search').emit('input');
+    assert.equal(app.nodes.get('project-grid').children.length, 1, query);
+  }
+  const assertLinks = () => {
+    const card = app.nodes.get('project-grid').children[0], links = [];
+    const collect = (node) => { if (node.tagName === 'A') links.push(node); node.children.forEach(collect); };
+    collect(card);
+    assert.equal(links.filter((link) => link.href === 'https://uyghurcommunity.github.io/uyghur-ui/interactions.html').length, 2);
+    assert.ok(links.some((link) => link.href === 'https://uyghurcommunity.github.io/uyghur-ui/guide/introduction.html'));
+    assert.match(card.textContent, /v0\.3\.0/);
+  };
+  assert.match(app.nodes.get('project-grid').textContent, /6 ئەسلى جانلىق مىسال/); assertLinks();
+  await app.nodes.get('language-toggle').emit('click');
+  assert.match(app.nodes.get('project-grid').textContent, /6 original interaction demos with native controls/);
+  assert.match(app.nodes.get('project-grid').textContent, /6 standalone HTML downloads/); assertLinks();
+  assert.equal(app.nodes.get('project-count').textContent, '10');
+  assert.equal(app.nodes.get('package-count').textContent, '7');
+});
