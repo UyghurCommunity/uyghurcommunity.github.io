@@ -1,4 +1,4 @@
-import { buildInstallCommand, buildSearchURL, filterProjects, isWebURL, validateCatalog } from './catalog.js';
+import { buildInstallCommand, buildSearchURL, filterProjects, installablePackages, isWebURL, validateCatalog } from './catalog.js';
 const $ = (id) => document.getElementById(id);
 const messages = {
   ug: {
@@ -96,7 +96,7 @@ function renderProjects() {
       card.append(packageRow);
     }
     const links = element('div', undefined, 'project-links');
-    links.append(projectLink(project.source, t('source')), projectLink(project.demo, t('demo')), projectLink(project.docs, t('docs')), projectLink(project.releases, t('releases'), 'release-link'));
+    links.append(projectLink(project.source, t('source')), projectLink(project.demo, t('demo')), projectLink(language === 'en' ? project.docsEnglish || project.docs : project.docs, t('docs')), projectLink(project.releases, t('releases'), 'release-link'));
     card.append(links);
     fragment.append(card);
   });
@@ -105,7 +105,7 @@ function renderProjects() {
   $('catalog-status').textContent = language === 'ug' ? `${catalog.projects.length} تۈردىن ${projects.length} سى كۆرسىتىلدى` : `Showing ${projects.length} of ${catalog.projects.length} projects`;
 }
 function renderPackages() {
-  const packages = catalog.projects.filter((project) => project.package);
+  const packages = installablePackages(catalog);
   if (!packages.some((project) => project.id === chosenPackage)) chosenPackage = packages[0]?.id || '';
   $('package-select').replaceChildren(...packages.map((project) => {
     const option = element('option', `${project.title[language]} — ${project.package}`);
@@ -199,7 +199,7 @@ async function start() {
     if (!check.valid) throw new Error(check.errors.join(' '));
     catalog = data;
     $('project-count').textContent = catalog.projects.length;
-    $('package-count').textContent = catalog.projects.filter((project) => project.package).length;
+    $('package-count').textContent = installablePackages(catalog).length;
     renderCategories(); renderProjects(); renderPackages();
   } catch (_) {
     catalogFailed = true;

@@ -1,17 +1,18 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { buildInstallCommand, buildSearchURL, filterProjects, isWebURL, validateCatalog } from '../src/catalog.js';
+import { buildInstallCommand, buildSearchURL, filterProjects, installablePackages, isWebURL, validateCatalog } from '../src/catalog.js';
 const catalog = JSON.parse(await readFile(new URL('../projects.json', import.meta.url), 'utf8'));
 
-test('catalog describes all ten real project routes and seven versioned packages without claiming npm publication', () => {
+test('catalog describes ten projects and eight package artifacts without claiming npm publication', () => {
   assert.deepEqual(validateCatalog(catalog), { valid: true, errors: [] });
   assert.deepEqual(catalog.projects.map((project) => project.id), ['doppa', 'doppa-kit', 'uyghur-keyboard', 'lughet-api', 'uyghur-rtl-lab', 'uyghur-ai-eval', 'uyghur-ui', 'doppa-studio', 'uyghur-text', 'uyghur-starters']);
   assert.equal(catalog.projects.filter((project) => project.package).length, 7);
+  assert.equal(installablePackages(catalog).length, 8);
   assert.equal(catalog.registryStatus, 'pending');
   for (const project of catalog.projects) {
     assert.equal(new URL(project.source).pathname, `/UyghurCommunity/${project.id}`);
-    assert.equal(new URL(project.demo).pathname, project.id === 'uyghur-ui' ? '/uyghur-ui/interactions.html' : `/${project.id}/`);
+    assert.equal(new URL(project.demo).pathname, project.id === 'uyghur-ui' ? '/uyghur-ui/lab.html' : `/${project.id}/`);
     assert.equal(new URL(project.releases).pathname, `/UyghurCommunity/${project.id}/releases`);
   }
 });
@@ -39,27 +40,53 @@ test('search terms and category are combined without changing the source catalog
   assert.equal(catalog.projects.length, 10);
 });
 
-test('UI interactions are discoverable in both languages with docs and the existing 0.3.0 release', () => {
+test('UI interactions and Lab are discoverable in both languages with docs and the 0.4.0 release', () => {
   const ui = catalog.projects.find((project) => project.id === 'uyghur-ui');
-  assert.equal(ui.demo, 'https://uyghurcommunity.github.io/uyghur-ui/interactions.html');
+  assert.equal(ui.demo, 'https://uyghurcommunity.github.io/uyghur-ui/lab.html');
   assert.equal(ui.docs, 'https://uyghurcommunity.github.io/uyghur-ui/guide/introduction.html');
+  assert.equal(ui.docsEnglish, 'https://uyghurcommunity.github.io/uyghur-ui/guide/en/introduction.html');
   assert.match(ui.description.ug, /6 ئەسلى جانلىق مىسال/);
   assert.match(ui.description.en, /6 original interaction demos with native controls and 6 standalone HTML downloads/);
   for (const query of ['interactions', 'interactivity', 'motion', 'native controls', 'standalone HTML', 'ئۆزئارا تەسىر', 'جانلاندۇرۇش', 'ھەرىكەت', 'جانلىق مىسال']) {
     assert.deepEqual(filterProjects(catalog.projects, { category: 'frontend', query }).map((project) => project.id), ['uyghur-ui'], query);
   }
-  assert.deepEqual(ui.status, { ug: 'v0.3.0', en: 'v0.3.0' });
-  assert.equal(buildInstallCommand(ui), 'npm install https://github.com/UyghurCommunity/uyghur-ui/releases/download/v0.3.0/uyghurcommunity-ui-0.3.0.tgz');
+  assert.deepEqual(ui.status, { ug: 'v0.4.0', en: 'v0.4.0' });
+  assert.equal(buildInstallCommand(ui), 'npm install https://github.com/UyghurCommunity/uyghur-ui/releases/download/v0.4.0/uyghurcommunity-ui-0.4.0.tgz');
   assert.equal(catalog.projects.length, 10);
   assert.equal(catalog.projects.filter((project) => project.package).length, 7);
 });
 
+test('additional React artifact uses the UI repository and is separate from the ten project cards', () => {
+  const before = JSON.stringify(catalog), packages = installablePackages(catalog);
+  const react = packages.find((entry) => entry.id === 'uyghur-ui-react');
+  assert.equal(react.repository, 'uyghur-ui'); assert.equal(react.package, '@uyghurcommunity/ui-react');
+  assert.equal(buildInstallCommand(react), 'npm install https://github.com/UyghurCommunity/uyghur-ui/releases/download/v0.4.0/uyghurcommunity-ui-react-0.4.0.tgz');
+  assert.equal(catalog.projects.some((entry) => entry.id === react.id), false);
+  packages.pop(); assert.equal(installablePackages(catalog).length, 8); assert.equal(JSON.stringify(catalog), before);
+  const legacy = { ...catalog }; delete legacy.additionalPackages; assert.equal(installablePackages(legacy).length, 7); assert.equal(validateCatalog(legacy).valid, true);
+  for (const query of ['writing', 'React', '@uyghurcommunity/ui-react', 'theme builder', 'registry', '2 application blocks', '22 guides', 'يېزىش', 'رەڭ قۇرغۇچ']) assert.ok(filterProjects(catalog.projects, { query }).some((entry) => entry.id === 'uyghur-ui'), query);
+});
+
+test('additional artifact validation rejects duplicate IDs, missing bilingual labels and unsafe repository/archive mappings', () => {
+  const invalid = (change) => { const candidate = structuredClone(catalog); change(candidate.additionalPackages[0], candidate); assert.equal(validateCatalog(candidate).valid, false); };
+  invalid((extra) => { extra.id = 'uyghur-ui'; });
+  invalid((extra, candidate) => { candidate.additionalPackages.push(structuredClone(extra)); });
+  invalid((extra) => { extra.repository = '../uyghur-ui'; });
+  invalid((extra) => { extra.repository = 'another-repository'; });
+  invalid((extra) => { delete extra.title.ug; });
+  invalid((extra) => { extra.package = '@other/ui-react'; });
+  invalid((extra) => { extra.archive = extra.archive.replace('uyghurcommunity-ui-react-', 'uyghurcommunity-text-'); });
+  invalid((extra) => { extra.archive = extra.archive.replace('ui-react-0.4.0.tgz', 'ui-react-0.5.0.tgz'); });
+  invalid((extra) => { extra.archive += '?download=1'; });
+  invalid((extra, candidate) => { candidate.additionalPackages = {}; });
+});
+
 test('installation commands use pinned community release archives, never unpublished registry names', () => {
-  for (const project of catalog.projects.filter((project) => project.package)) {
+  for (const project of installablePackages(catalog)) {
     const command = buildInstallCommand(project);
     assert.equal(command, `npm install ${project.archive}`);
     const pathname = new URL(project.archive).pathname;
-    assert.ok(pathname.startsWith('/UyghurCommunity/' + project.id + '/'));
+    assert.ok(pathname.startsWith('/UyghurCommunity/' + (project.repository ?? project.id) + '/'));
     assert.ok(/\/archive\/refs\/tags\/v\d+\.\d+\.\d+\.tar\.gz$/.test(pathname) || /\/releases\/download\/v\d+\.\d+\.\d+\/uyghurcommunity-[a-z-]+-\d+\.\d+\.\d+\.tgz$/.test(pathname));
     assert.ok(!command.includes('npm install @'));
   }
@@ -105,9 +132,9 @@ test('draft vocabulary and evaluation status are visible in both languages', () 
 
 test('new release assets match repository, package name and pinned version', () => {
   const expected = {
-    'uyghur-ui': ['0.3.0', 'uyghurcommunity-ui-0.3.0.tgz'],
+    'uyghur-ui': ['0.4.0', 'uyghurcommunity-ui-0.4.0.tgz'],
     'uyghur-text': ['0.1.0', 'uyghurcommunity-text-0.1.0.tgz'],
-    'uyghur-starters': ['0.1.0', 'uyghurcommunity-create-0.1.0.tgz'],
+    'uyghur-starters': ['0.2.0', 'uyghurcommunity-create-0.2.0.tgz'],
   };
   for (const [id,[version,filename]] of Object.entries(expected)) {
     const project = catalog.projects.find((item) => item.id === id);
@@ -115,7 +142,7 @@ test('new release assets match repository, package name and pinned version', () 
     assert.equal(buildInstallCommand(project), 'npm install ' + project.archive);
   }
   const ui = catalog.projects.find((project) => project.id === 'uyghur-ui');
-  assert.throws(() => buildInstallCommand({...ui,archive:ui.archive.replace('ui-0.3.0.tgz','ui-0.4.0.tgz')}));
+  assert.throws(() => buildInstallCommand({...ui,archive:ui.archive.replace('ui-0.4.0.tgz','ui-0.5.0.tgz')}));
   assert.throws(() => buildInstallCommand({...ui,archive:ui.archive.replace('uyghurcommunity-ui-','uyghurcommunity-text-')}));
   assert.throws(() => buildInstallCommand({...ui,archive:ui.archive.replace('/uyghur-ui/','/other-repo/')}));
   assert.throws(() => buildInstallCommand({...ui,archive:ui.archive.replace('https:','http:')}));

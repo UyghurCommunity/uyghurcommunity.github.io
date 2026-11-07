@@ -240,8 +240,8 @@
         "en": "Uyghur UI"
       },
       "description": {
-        "ug": "ئۇيغۇرچە RTL بۆلەكلىرى، قاچىلاش قوللانمىسى ۋە 6 ئەسلى جانلىق مىسال. كۇنۇپكا ۋە سىيرىلما كونتروللار، 6 مۇستەقىل HTML چۈشۈرۈش، سىزىقلىق ۋە مىراس رەڭلىرىدە 110 SVG سىنبەلگە (63 مەدەنىيەت سىنبەلگىسى)، شەرقىي تۈركىستان بايرىقى ۋە خەرىتىسى.",
-        "en": "Uyghur RTL components and structured guides, plus 6 original interaction demos with native controls and 6 standalone HTML downloads. Includes 110 SVG icons (63 cultural) in outline and heritage-color styles, plus East Turkistan flag and map assets."
+        "ug": "ئۇيغۇرچە يېزىش رامكىسى، React ماسلاشتۇرغۇچى ۋە 4 مەدەنىيەت رەڭ قۇرغۇچى. 6 قاچىلىغىلى بولىدىغان بۆلەك، 2 قوللىنىش قۇرۇلمىسى، 22 ئۇيغۇرچە/English قوللانما، 110 SVG سىنبەلگە (63 مەدەنىيەت سىنبەلگىسى)، بايراق ۋە خەرىتە؛ 6 ئەسلى جانلىق مىسالمۇ بار.",
+        "en": "Uyghur writing, React adapters and a builder with 4 cultural themes. Includes 6 installable components, 2 application blocks, 22 Uyghur/English guides, 110 SVG icons (63 cultural) in outline and heritage-color styles, East Turkistan flag and map assets, and 6 original interaction demos with native controls and 6 standalone HTML downloads."
       },
       "category": "frontend",
       "type": {
@@ -249,13 +249,29 @@
         "en": "UI gallery + CSS library"
       },
       "status": {
-        "ug": "v0.3.0",
-        "en": "v0.3.0"
+        "ug": "v0.4.0",
+        "en": "v0.4.0"
       },
       "package": "@uyghurcommunity/ui",
-      "archive": "https://github.com/UyghurCommunity/uyghur-ui/releases/download/v0.3.0/uyghurcommunity-ui-0.3.0.tgz",
+      "archive": "https://github.com/UyghurCommunity/uyghur-ui/releases/download/v0.4.0/uyghurcommunity-ui-0.4.0.tgz",
       "tags": [
         "UI",
+        "writing",
+        "React",
+        "@uyghurcommunity/ui-react",
+        "theme builder",
+        "4 themes",
+        "registry",
+        "6 installer components",
+        "2 application blocks",
+        "22 guides",
+        "lab",
+        "يېزىش",
+        "يېزىش رامكىسى",
+        "رەڭ قۇرغۇچ",
+        "مەدەنىيەت رەڭلىرى",
+        "قوللىنىش قۇرۇلمىسى",
+        "English docs",
         "interactions",
         "motion",
         "interactivity",
@@ -303,9 +319,10 @@
         "ئەتلەس"
       ],
       "source": "https://github.com/UyghurCommunity/uyghur-ui",
-      "demo": "https://uyghurcommunity.github.io/uyghur-ui/interactions.html",
+      "demo": "https://uyghurcommunity.github.io/uyghur-ui/lab.html",
       "docs": "https://uyghurcommunity.github.io/uyghur-ui/guide/introduction.html",
-      "releases": "https://github.com/UyghurCommunity/uyghur-ui/releases"
+      "releases": "https://github.com/UyghurCommunity/uyghur-ui/releases",
+      "docsEnglish": "https://uyghurcommunity.github.io/uyghur-ui/guide/en/introduction.html"
     },
     {
       "id": "doppa-studio",
@@ -380,8 +397,8 @@
         "en": "Uyghur Starters"
       },
       "description": {
-        "ug": "بىلوگ، قوللانما، ئىجادىيەت ۋە جەمئىيەت ئۈچۈن تۆت مۇستەقىل RTL قېلىپى. تورسىز CLI يېڭى قىسقۇچقا كۆچۈرىدۇ؛ ئۈلگە مەزمۇن ئېنىق بەلگىلەنگەن.",
-        "en": "Four independent RTL starters for blogs, docs, portfolios, and communities. An offline CLI copies a new site; sample content is explicitly labeled."
+        "ug": "تۆت مۇستەقىل RTL تور قېلىپى ۋە 6 UI بۆلەك قاچىلاش CLI سى. يېڭى مۇندەرىجىگە كۆچۈرىدۇ، ئالدىن مەۋجۇت ھۆججەتنى ئۈستىگە يازمايدۇ؛ ئۈلگە مەزمۇن ئېنىق بەلگىلەنگەن.",
+        "en": "Four independent RTL website starters and a CLI for 6 UI components. Copies into a new directory without overwriting existing files; sample content stays explicitly labeled."
       },
       "category": "starters",
       "type": {
@@ -389,11 +406,11 @@
         "en": "Four templates + offline CLI"
       },
       "status": {
-        "ug": "ئۈلگە مەزمۇن",
-        "en": "Illustrative starter content"
+        "ug": "v0.2.0 · ئۈلگە مەزمۇن",
+        "en": "v0.2.0 · Illustrative starter content"
       },
       "package": "@uyghurcommunity/create",
-      "archive": "https://github.com/UyghurCommunity/uyghur-starters/releases/download/v0.1.0/uyghurcommunity-create-0.1.0.tgz",
+      "archive": "https://github.com/UyghurCommunity/uyghur-starters/releases/download/v0.2.0/uyghurcommunity-create-0.2.0.tgz",
       "tags": [
         "templates",
         "blog",
@@ -401,12 +418,27 @@
         "portfolio",
         "community",
         "CLI",
-        "starter"
+        "starter",
+        "UI components",
+        "installer",
+        "قاچىلاش"
       ],
       "source": "https://github.com/UyghurCommunity/uyghur-starters",
       "demo": "https://uyghurcommunity.github.io/uyghur-starters/",
       "docs": "https://github.com/UyghurCommunity/uyghur-starters#readme",
       "releases": "https://github.com/UyghurCommunity/uyghur-starters/releases"
+    }
+  ],
+  "additionalPackages": [
+    {
+      "id": "uyghur-ui-react",
+      "repository": "uyghur-ui",
+      "title": {
+        "ug": "ئۇيغۇرچە UI · React",
+        "en": "Uyghur UI React"
+      },
+      "package": "@uyghurcommunity/ui-react",
+      "archive": "https://github.com/UyghurCommunity/uyghur-ui/releases/download/v0.4.0/uyghurcommunity-ui-react-0.4.0.tgz"
     }
   ]
 }

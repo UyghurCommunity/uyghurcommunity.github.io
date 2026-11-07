@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import vm from 'node:vm';
-import { buildInstallCommand, buildSearchURL, filterProjects, isWebURL, validateCatalog } from '../src/catalog.js';
+import { buildInstallCommand, buildSearchURL, filterProjects, installablePackages, isWebURL, validateCatalog } from '../src/catalog.js';
 const catalog = JSON.parse(await readFile(new URL('../projects.json', import.meta.url), 'utf8'));
 const html = await readFile(new URL('../index.html', import.meta.url), 'utf8');
 // Captured from the original Lughet 0.1.0 dataset via its real local adapter.
@@ -59,7 +59,7 @@ async function harness({ failCatalog = false, api, preferences = {} } = {}) {
   const storage = new Map(Object.entries(preferences)), copied = [];
   const calls = [];
   const context = vm.createContext({
-    document, buildInstallCommand, buildSearchURL, filterProjects, isWebURL, validateCatalog, URL, AbortController, setTimeout, clearTimeout,
+    document, buildInstallCommand, buildSearchURL, filterProjects, installablePackages, isWebURL, validateCatalog, URL, AbortController, setTimeout, clearTimeout,
     localStorage: { getItem: (key) => storage.get(key) ?? null, setItem: (key, value) => storage.set(key, value) },
     navigator: { clipboard: { writeText: async (text) => copied.push(text) } },
     fetch: async (url, options) => {
@@ -77,14 +77,14 @@ async function harness({ failCatalog = false, api, preferences = {} } = {}) {
   return { nodes, root, storage, copied, calls, context };
 }
 
-test('application loads ten cards, seven release packages, and honest registry status', async () => {
+test('application loads ten cards, eight release packages, and honest registry status', async () => {
   const app = await harness();
   assert.equal(app.nodes.get('project-grid').children.length, 10);
-  assert.equal(app.nodes.get('package-select').children.length, 7);
+  assert.equal(app.nodes.get('package-select').children.length, 8);
   assert.match(app.nodes.get('install-command').textContent, /doppa-kit\/archive\/refs\/tags\/v0.1.0/);
   assert.equal(app.nodes.get('registry-note').hidden, false);
   assert.equal(app.nodes.get('project-count').textContent, '10');
-  assert.equal(app.nodes.get('package-count').textContent, '7');
+  assert.equal(app.nodes.get('package-count').textContent, '8');
 });
 
 test('category and text search combine, then clear restores all cards', async () => {
@@ -202,21 +202,21 @@ test('new projects are searchable and new release package choices survive langua
   assert.equal(app.copied[0], 'npm install ' + archive);
   await app.nodes.get('clear-filters').emit('click');
   assert.equal(app.nodes.get('project-grid').children.length, 10);
-  assert.equal(app.nodes.get('package-count').textContent, '7');
+  assert.equal(app.nodes.get('package-count').textContent, '8');
 });
 
-test('cultural and map searches expose UI 0.3.0 and its current release in both languages', async () => {
+test('cultural and map searches expose UI 0.4.0 and its current release in both languages', async () => {
   const app = await harness();
   app.nodes.get('project-search').value = 'خەرىتە';
   await app.nodes.get('project-search').emit('input');
   assert.equal(app.nodes.get('project-grid').children.length, 1);
   assert.match(app.nodes.get('project-grid').textContent, /110 SVG/);
   assert.match(app.nodes.get('project-grid').textContent, /63/);
-  assert.match(app.nodes.get('project-grid').textContent, /v0\.3\.0/);
+  assert.match(app.nodes.get('project-grid').textContent, /v0\.4\.0/);
   const select = app.nodes.get('package-select');
   select.children.forEach((option) => { option.selected = option.value === 'uyghur-ui'; });
   await select.emit('change');
-  const command = 'npm install https://github.com/UyghurCommunity/uyghur-ui/releases/download/v0.3.0/uyghurcommunity-ui-0.3.0.tgz';
+  const command = 'npm install https://github.com/UyghurCommunity/uyghur-ui/releases/download/v0.4.0/uyghurcommunity-ui-0.4.0.tgz';
   assert.equal(app.nodes.get('install-command').textContent, command);
   await app.nodes.get('language-toggle').emit('click');
   assert.equal(app.nodes.get('project-grid').children.length, 1);
@@ -229,7 +229,7 @@ test('cultural and map searches expose UI 0.3.0 and its current release in both 
   assert.match(app.nodes.get('project-grid').textContent, /Uyghur UI/);
   assert.equal(app.nodes.get('install-command').textContent, command);
   assert.equal(app.nodes.get('project-count').textContent, '10');
-  assert.equal(app.nodes.get('package-count').textContent, '7');
+  assert.equal(app.nodes.get('package-count').textContent, '8');
 });
 
 test('interaction searches expose six website demos, their live gallery, and docs in both interface languages', async () => {
@@ -243,14 +243,27 @@ test('interaction searches expose six website demos, their live gallery, and doc
     const card = app.nodes.get('project-grid').children[0], links = [];
     const collect = (node) => { if (node.tagName === 'A') links.push(node); node.children.forEach(collect); };
     collect(card);
-    assert.equal(links.filter((link) => link.href === 'https://uyghurcommunity.github.io/uyghur-ui/interactions.html').length, 2);
-    assert.ok(links.some((link) => link.href === 'https://uyghurcommunity.github.io/uyghur-ui/guide/introduction.html'));
-    assert.match(card.textContent, /v0\.3\.0/);
+    assert.equal(links.filter((link) => link.href === 'https://uyghurcommunity.github.io/uyghur-ui/lab.html').length, 2);
+    assert.ok(links.some((link) => link.href === `https://uyghurcommunity.github.io/uyghur-ui/guide/${app.root.lang === 'en' ? 'en/' : ''}introduction.html`));
+    assert.match(card.textContent, /v0\.4\.0/);
   };
   assert.match(app.nodes.get('project-grid').textContent, /6 ئەسلى جانلىق مىسال/); assertLinks();
   await app.nodes.get('language-toggle').emit('click');
   assert.match(app.nodes.get('project-grid').textContent, /6 original interaction demos with native controls/);
   assert.match(app.nodes.get('project-grid').textContent, /6 standalone HTML downloads/); assertLinks();
   assert.equal(app.nodes.get('project-count').textContent, '10');
-  assert.equal(app.nodes.get('package-count').textContent, '7');
+  assert.equal(app.nodes.get('package-count').textContent, '8');
+});
+
+test('React is an eighth install choice from the UI repository and survives language switching without an extra project card', async () => {
+  const app = await harness(), select = app.nodes.get('package-select');
+  assert.equal(select.children.length, 8);
+  select.children.forEach((option) => { option.selected = option.value === 'uyghur-ui-react'; }); await select.emit('change');
+  const command = 'npm install https://github.com/UyghurCommunity/uyghur-ui/releases/download/v0.4.0/uyghurcommunity-ui-react-0.4.0.tgz';
+  assert.equal(app.nodes.get('install-command').textContent, command);
+  await app.nodes.get('language-toggle').emit('click'); assert.equal(select.value, 'uyghur-ui-react'); assert.equal(app.nodes.get('install-command').textContent, command);
+  await app.nodes.get('copy-command').emit('click'); assert.equal(app.copied[0], command);
+  app.nodes.get('project-search').value = '@uyghurcommunity/ui-react'; await app.nodes.get('project-search').emit('input');
+  assert.equal(app.nodes.get('project-grid').children.length, 1); assert.match(app.nodes.get('project-grid').textContent, /4 cultural themes/); assert.match(app.nodes.get('project-grid').textContent, /22 Uyghur\/English guides/);
+  assert.equal(app.nodes.get('project-count').textContent, '10'); assert.equal(app.nodes.get('package-count').textContent, '8');
 });
